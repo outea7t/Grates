@@ -22,6 +22,9 @@
 		22DD32D62B21F00C00B3A72B /* Comfortaa-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 22DD32D72B21F00C00B3A72B /* Comfortaa-Regular.ttf */; };
 		22DD32D92B22072300B3A72B /* RegisterTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DD32D82B22072300B3A72B /* RegisterTextField.swift */; };
 		22DD32DB2B236E0700B3A72B /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DD32DA2B236E0700B3A72B /* RegistrationViewController.swift */; };
+		22DD32DD2B23A54700B3A72B /* RegistrationViewsTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DD32DC2B23A54700B3A72B /* RegistrationViewsTransition.swift */; };
+		22DD32E02B23AB9F00B3A72B /* ColorNames.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DD32DF2B23AB9F00B3A72B /* ColorNames.swift */; };
+		22DD32E22B23ABA800B3A72B /* SeguesNames.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DD32E12B23ABA800B3A72B /* SeguesNames.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,6 +44,9 @@
 		22DD32D72B21F00C00B3A72B /* Comfortaa-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Comfortaa-Regular.ttf"; sourceTree = "<group>"; };
 		22DD32D82B22072300B3A72B /* RegisterTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterTextField.swift; sourceTree = "<group>"; };
 		22DD32DA2B236E0700B3A72B /* RegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
+		22DD32DC2B23A54700B3A72B /* RegistrationViewsTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewsTransition.swift; sourceTree = "<group>"; };
+		22DD32DF2B23AB9F00B3A72B /* ColorNames.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorNames.swift; sourceTree = "<group>"; };
+		22DD32E12B23ABA800B3A72B /* SeguesNames.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeguesNames.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,9 +82,9 @@
 			children = (
 				22C95F0A2B21370D00EBEC3F /* AppDelegate.swift */,
 				22C95F0C2B21370D00EBEC3F /* SceneDelegate.swift */,
-				22C95F0E2B21370D00EBEC3F /* LogInViewController.swift */,
-				22DD32DA2B236E0700B3A72B /* RegistrationViewController.swift */,
-				22DD32D82B22072300B3A72B /* RegisterTextField.swift */,
+				22DD32DF2B23AB9F00B3A72B /* ColorNames.swift */,
+				22DD32E12B23ABA800B3A72B /* SeguesNames.swift */,
+				22DD32DE2B23AB8500B3A72B /* Registration */,
 				22DD32BB2B21EBC900B3A72B /* RiveAnimations */,
 				22DD32BA2B21EBC300B3A72B /* Fonts */,
 				22C95F102B21370D00EBEC3F /* Main.storyboard */,
@@ -107,6 +113,17 @@
 				22C95F212B21398000EBEC3F /* shapesanimation.riv */,
 			);
 			path = RiveAnimations;
+			sourceTree = "<group>";
+		};
+		22DD32DE2B23AB8500B3A72B /* Registration */ = {
+			isa = PBXGroup;
+			children = (
+				22C95F0E2B21370D00EBEC3F /* LogInViewController.swift */,
+				22DD32DA2B236E0700B3A72B /* RegistrationViewController.swift */,
+				22DD32DC2B23A54700B3A72B /* RegistrationViewsTransition.swift */,
+				22DD32D82B22072300B3A72B /* RegisterTextField.swift */,
+			);
+			path = Registration;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -192,11 +209,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				22DD32DD2B23A54700B3A72B /* RegistrationViewsTransition.swift in Sources */,
 				22DD32D92B22072300B3A72B /* RegisterTextField.swift in Sources */,
 				22C95F0F2B21370D00EBEC3F /* LogInViewController.swift in Sources */,
 				22C95F0B2B21370D00EBEC3F /* AppDelegate.swift in Sources */,
+				22DD32E22B23ABA800B3A72B /* SeguesNames.swift in Sources */,
 				22C95F0D2B21370D00EBEC3F /* SceneDelegate.swift in Sources */,
 				22DD32DB2B236E0700B3A72B /* RegistrationViewController.swift in Sources */,
+				22DD32E02B23AB9F00B3A72B /* ColorNames.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

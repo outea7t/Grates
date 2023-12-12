@@ -22,7 +22,7 @@ class LogInViewController: UIViewController {
     @IBOutlet weak var forgotPasswordButton: UIButton!
     
     var emailTextField = RegisterTextField(placeholder: "example@email.com")
-    var passwordTextField = RegisterTextField(placeholder: "password123_*")
+    var passwordTextField = RegisterTextField(placeholder: "password")
     
     private var blurView: UIVisualEffectView?
     private var gradientView = UIView()
@@ -168,7 +168,6 @@ class LogInViewController: UIViewController {
         passwordTextFieldConstraints.append(
             self.passwordTextField.centerXAnchor.constraint(equalTo: self.frameView.centerXAnchor)
         )
-        
         
         NSLayoutConstraint.activate(passwordTextFieldConstraints)
     }
