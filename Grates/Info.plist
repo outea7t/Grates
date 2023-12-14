@@ -5,6 +5,7 @@
 	<key>UIAppFonts</key>
 	<array>
 		<string>Comfortaa-Bold.ttf</string>
+		<string>MPLUSRounded1c-Thin.ttf</string>
 	</array>
 	<key>UIApplicationSceneManifest</key>
 	<dict>

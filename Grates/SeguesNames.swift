@@ -10,5 +10,6 @@ import UIKit
 
 /// имена всех переходов, которые существуют в приложении
 enum SeguesNames: String {
-    case def
+    case loginToRegistration
+    case loginToNewsFeed
 }

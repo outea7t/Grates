@@ -58,18 +58,18 @@ class RegistrationViewController: UIViewController {
         NSLayoutConstraint.activate(signUpButtonConstraints)
     }
     private func setSignInButton() {
-        self.signUpButton.translatesAutoresizingMaskIntoConstraints = false
+        self.signInButton.translatesAutoresizingMaskIntoConstraints = false
         
         var signInButtonConstraints = [NSLayoutConstraint]()
         
         signInButtonConstraints.append(
-            self.signUpButton.widthAnchor.constraint(equalToConstant: 130)
+            self.signInButton.widthAnchor.constraint(equalToConstant: 130)
         )
         signInButtonConstraints.append(
-            self.signUpButton.heightAnchor.constraint(equalToConstant: 46)
+            self.signInButton.heightAnchor.constraint(equalToConstant: 46)
         )
         signInButtonConstraints.append(
-            self.signUpButton.trailingAnchor.constraint(equalTo: self.frameView.trailingAnchor, constant: 0)
+            self.signInButton.trailingAnchor.constraint(equalTo: self.frameView.trailingAnchor, constant: 0)
         )
         signInButtonConstraints.append(
             self.signInButton.topAnchor.constraint(equalTo: self.frameView.topAnchor, constant: 18)
@@ -133,15 +133,55 @@ class RegistrationViewController: UIViewController {
         
         self.firstNameTextField.translatesAutoresizingMaskIntoConstraints = false
         
-        var firstNameTextFieldConstraints = [NSLayoutConstraint]()
+        var constraints = [NSLayoutConstraint]()
+        
+        constraints.append(self.firstNameTextField.widthAnchor.constraint(equalToConstant: 275))
+        constraints.append(self.firstNameTextField.heightAnchor.constraint(equalToConstant: 57))
+        constraints.append(self.firstNameTextField.topAnchor.constraint(equalTo: self.signUpButton.bottomAnchor, constant: 11))
+        constraints.append(self.firstNameTextField.centerXAnchor.constraint(equalTo: self.frameView.centerXAnchor))
+        
+        NSLayoutConstraint.activate(constraints)
     }
     private func setSecondNameTextField() {
+        self.frameView.addSubview(self.secondNameTextField)
         
+        self.secondNameTextField.translatesAutoresizingMaskIntoConstraints = false
+        
+        var constraints = [NSLayoutConstraint]()
+        
+        constraints.append(self.secondNameTextField.widthAnchor.constraint(equalToConstant: 275))
+        constraints.append(self.secondNameTextField.heightAnchor.constraint(equalToConstant: 57))
+        constraints.append(self.secondNameTextField.topAnchor.constraint(equalTo: self.firstNameTextField.bottomAnchor, constant: 11))
+        constraints.append(self.secondNameTextField.centerXAnchor.constraint(equalTo: self.firstNameTextField.centerXAnchor))
+        
+        NSLayoutConstraint.activate(constraints)
     }
     private func setEmailTextField() {
+        self.frameView.addSubview(self.emailTextField)
         
+        self.emailTextField.translatesAutoresizingMaskIntoConstraints = false
+        
+        let constraints: [NSLayoutConstraint] = [
+            self.emailTextField.widthAnchor.constraint(equalToConstant: 275),
+            self.emailTextField.heightAnchor.constraint(equalToConstant: 57),
+            self.emailTextField.topAnchor.constraint(equalTo: self.secondNameTextField.bottomAnchor, constant: 11),
+            self.emailTextField.centerXAnchor.constraint(equalTo: self.frameView.centerXAnchor)
+        ]
+        
+        NSLayoutConstraint.activate(constraints)
     }
     private func setPasswordTextField() {
+        self.frameView.addSubview(self.passwordTextField)
         
+        self.passwordTextField.translatesAutoresizingMaskIntoConstraints = false
+        
+        let constraints: [NSLayoutConstraint] = [
+            self.passwordTextField.widthAnchor.constraint(equalToConstant: 275),
+            self.passwordTextField.heightAnchor.constraint(equalToConstant: 57),
+            self.passwordTextField.topAnchor.constraint(equalTo: self.emailTextField.bottomAnchor, constant: 11),
+            self.passwordTextField.centerXAnchor.constraint(equalTo: self.frameView.centerXAnchor)
+        ]
+        
+        NSLayoutConstraint.activate(constraints)
     }
 }

@@ -1,65 +1,42 @@
-////
-////  RegistrationViewsTransition.swift
-////  Grates
-////
-////  Created by Out East on 08.12.2023.
-////
 //
-//import UIKit
+//  RegistrationViewsTransition.swift
+//  Grates
 //
-//class RegistrationViewsTransition: UIViewControllerAnimatedTransitioning {
-//    func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
-//        <#code#>
-//    }
-//    
-//    func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
-//        <#code#>
-//    }
-//    
-//    func isEqual(_ object: Any?) -> Bool {
-//        <#code#>
-//    }
-//    
-//    var hash: Int
-//    
-//    var superclass: AnyClass?
-//    
-//    func `self`() -> Self {
-//        <#code#>
-//    }
-//    
-//    func perform(_ aSelector: Selector!) -> Unmanaged<AnyObject>! {
-//        <#code#>
-//    }
-//    
-//    func perform(_ aSelector: Selector!, with object: Any!) -> Unmanaged<AnyObject>! {
-//        <#code#>
-//    }
-//    
-//    func perform(_ aSelector: Selector!, with object1: Any!, with object2: Any!) -> Unmanaged<AnyObject>! {
-//        <#code#>
-//    }
-//    
-//    func isProxy() -> Bool {
-//        <#code#>
-//    }
-//    
-//    func isKind(of aClass: AnyClass) -> Bool {
-//        <#code#>
-//    }
-//    
-//    func isMember(of aClass: AnyClass) -> Bool {
-//        <#code#>
-//    }
-//    
-//    func conforms(to aProtocol: Protocol) -> Bool {
-//        <#code#>
-//    }
-//    
-//    func responds(to aSelector: Selector!) -> Bool {
-//        <#code#>
-//    }
-//    
-//    var description: String
+//  Created by Out East on 08.12.2023.
 //
-//}
+
+import Foundation
+import UIKit
+
+class RegistrationViewsTransition: NSObject {
+    enum AnimationType {
+        case present
+        case dismiss
+    }
+    private let animationDuration: TimeInterval
+    private let animationType: AnimationType
+    
+    init(animationDuration: TimeInterval, animationType: AnimationType) {
+        self.animationDuration = animationDuration
+        self.animationType = animationType
+    }
+}
+
+extension RegistrationViewsTransition: UIViewControllerAnimatedTransitioning {
+    
+    func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
+        return self.animationDuration
+    }
+    
+    func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
+        <#code#>
+    }
+    
+    private func dismissTransition(with transitionContext: UIViewControllerContextTransitioning) {
+        
+    }
+    
+    private func presentTransition(with transitionContext: UIViewControllerContextTransitioning) {
+        
+    }
+}

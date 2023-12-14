@@ -44,6 +44,9 @@
                                                 </fragment>
                                             </attributedString>
                                         </state>
+                                        <connections>
+                                            <action selector="LogInButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="9lQ-C6-esx"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Cf1-GT-CRL">
                                         <rect key="frame" x="195" y="16" width="115" height="45"/>
@@ -62,6 +65,9 @@
                                         <state key="normal" title="Sign Up">
                                             <color key="titleColor" red="0.1529411765" green="0.0" blue="0.36470588240000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         </state>
+                                        <connections>
+                                            <action selector="signUpButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="UCE-Lf-k5J"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xf0-zm-Kiv">
                                         <rect key="frame" x="80" y="251" width="167" height="35"/>
@@ -71,6 +77,9 @@
                                         <state key="normal" title="forgot password?">
                                             <color key="titleColor" red="0.14901960784313725" green="0.0" blue="0.35686274509803922" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         </state>
+                                        <connections>
+                                            <action selector="forgotPasswordButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="9Qk-4c-yev"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.89411764705882346" green="0.94509803921568625" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -93,6 +102,7 @@
                         <outlet property="logoLabel" destination="etw-eV-CG5" id="Djk-uR-gZU"/>
                         <outlet property="signInButton" destination="Cf1-GT-CRL" id="TK0-ak-jJE"/>
                         <outlet property="signUpButton" destination="4XY-eQ-qKI" id="LsT-Wf-JXe"/>
+                        <segue destination="usf-R1-xZr" kind="presentation" modalPresentationStyle="overFullScreen" id="Em2-hc-lDU"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

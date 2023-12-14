@@ -47,6 +47,16 @@ class LogInViewController: UIViewController {
     }
     
     
+    @IBAction func signUpButtonTapped(_ sender: UIButton) {
+        
+    }
+    @IBAction func forgotPasswordButtonTapped(_ sender: UIButton) {
+        
+    }
+    @IBAction func LogInButtonTapped(_ sender: UIButton) {
+        
+    }
+    
     // настраиваем градиент на фоне
     private func setGradientLayer() {
         self.gradientView.frame = self.view.bounds
@@ -150,6 +160,7 @@ class LogInViewController: UIViewController {
         
         NSLayoutConstraint.activate(emailTextFieldConstraints)
     }
+    
     private func setPasswordTextField() {
         self.frameView.addSubview(self.passwordTextField)
         self.frameView.bringSubviewToFront(self.passwordTextField)
