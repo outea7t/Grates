@@ -54,8 +54,6 @@ extension RegistrationViewsTransition: UIViewControllerAnimatedTransitioning {
         
         let toFrame = logInViewController.frameView.frame
         let toLogInButtonFrame = logInViewController.logInButton.frame.offsetBy(dx: 0, dy: -100)
-        let toSignInButtonOrigin = logInViewController.signInButton.frame.origin
-        let toSignUpButtonOrigin = logInViewController.signUpButton.frame.origin
         
         logInViewController.frameView.frame.size = registrationViewController.frameView.frame.size
         logInViewController.frameView.frame.origin = registrationViewController.frameView.frame.origin
@@ -99,29 +97,28 @@ extension RegistrationViewsTransition: UIViewControllerAnimatedTransitioning {
             registrationViewController.signUpBigButton.frame = registrationViewController.signUpBigButton.frame.offsetBy(dx: 0, dy: 150)
         }
         
-        UIView.animate(withDuration: 0.01, delay: 0.5, options: .curveEaseOut) {
+        UIView.animate(withDuration: 0.01, delay: 0.85, options: .curveEaseOut) {
             registrationViewController.frameView.alpha = 0.0
         }
         
         // MARK: Анимируем LogInViewController
-        
-        UIView.animate(withDuration: 1.0, delay: 0.51, options: .curveEaseOut) {
+        UIView.animate(withDuration: 0.75, delay: 0.87, options: .curveEaseOut) {
             logInViewController.frameView.frame = toFrame
         }
         
-        UIView.animate(withDuration: 0.25, delay: 1.51, options: .curveEaseOut) {
+        UIView.animate(withDuration: 0.25, delay: 1.26, options: .curveEaseOut) {
             logInViewController.emailTextField.alpha = 1.0
         }
         
-        UIView.animate(withDuration: 0.25, delay: 1.66, options: .curveEaseOut) {
+        UIView.animate(withDuration: 0.25, delay: 1.41, options: .curveEaseOut) {
             logInViewController.passwordTextField.alpha = 1.0
         }
         
-        UIView.animate(withDuration: 0.3, delay: 1.55, options: .curveEaseOut) {
+        UIView.animate(withDuration: 0.3, delay: 1.41, options: .curveEaseOut) {
             logInViewController.logInButton.frame = toLogInButtonFrame
         }
         
-        UIView.animate(withDuration: 0.3, delay: 1.81, options: .curveEaseOut) {
+        UIView.animate(withDuration: 0.3, delay: 1.6, options: .curveEaseOut) {
             logInViewController.forgotPasswordButton.alpha = 1.0
         } completion: { isEnded in
             transitionContext.completeTransition(isEnded)
@@ -152,6 +149,7 @@ extension RegistrationViewsTransition: UIViewControllerAnimatedTransitioning {
         registrationViewController.emailTextField.alpha = 0.0
         registrationViewController.passwordTextField.alpha = 0.0
         registrationViewController.frameView.alpha = 0.0
+        
 //        registrationViewController.frameView.transform = CGAffineTransformScale(registrationViewController.frameView.transform, 1.0, 1.0/1.2)
         
         UIView.animate(withDuration: 0.4, delay: 0.0, options: .curveEaseOut) {
@@ -190,45 +188,43 @@ extension RegistrationViewsTransition: UIViewControllerAnimatedTransitioning {
             registrationViewController.frameView.alpha = 1.0
         }
         
-        UIView.animate(withDuration: 1.0,
+        UIView.animate(withDuration: 0.75,
                        delay: 0.65,
                        options: .curveEaseOut) {
             registrationViewController.frameView.frame = toFrame
         }
         
-        UIView.animate(withDuration: 0.3,
-                       delay: 1.5,
+        UIView.animate(withDuration: 0.25,
+                       delay: 1.65,
                        options: .curveEaseInOut) {
             registrationViewController.firstNameTextField.alpha = 1.0
         }
         
-        UIView.animate(withDuration: 0.3,
-                       delay: 1.65,
+        UIView.animate(withDuration: 0.25,
+                       delay: 1.8,
                        options: .curveEaseInOut) {
             registrationViewController.secondNameTextField.alpha = 1.0
         }
         
-        UIView.animate(withDuration: 0.3,
-                       delay: 1.8,
+        UIView.animate(withDuration: 0.25,
+                       delay: 1.95,
                        options: .curveEaseInOut) {
             registrationViewController.emailTextField.alpha = 1.0
         }
         
-        UIView.animate(withDuration: 0.3,
-                       delay: 1.95,
+        UIView.animate(withDuration: 0.25,
+                       delay: 2.1,
                        options: .curveEaseInOut) {
             registrationViewController.passwordTextField.alpha = 1.0
         }
         
-        UIView.animate(withDuration: 0.3,
-                       delay: 1.41,
+        UIView.animate(withDuration: 0.25,
+                       delay: 1.6,
                        options: .curveEaseOut) {
             registrationViewController.signUpBigButton.frame = toSignUpBigButtonFrame
         } completion: { _ in
-       let finished = !transitionContext.transitionWasCancelled
-       transitionContext.completeTransition(finished)
-   }
-        
-        
+            let finished = !transitionContext.transitionWasCancelled
+            transitionContext.completeTransition(finished)
+        }
     }
 }

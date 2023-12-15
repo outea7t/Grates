@@ -86,10 +86,10 @@ class RegistrationViewController: UIViewController {
         var signInButtonConstraints = [NSLayoutConstraint]()
         
         signInButtonConstraints.append(
-            self.signInButton.widthAnchor.constraint(equalToConstant: 130)
+            self.signInButton.widthAnchor.constraint(equalToConstant: 150)
         )
         signInButtonConstraints.append(
-            self.signInButton.heightAnchor.constraint(equalToConstant: 46)
+            self.signInButton.heightAnchor.constraint(equalToConstant: 50)
         )
         signInButtonConstraints.append(
             self.signInButton.trailingAnchor.constraint(equalTo: self.frameView.trailingAnchor, constant: 0)
@@ -113,9 +113,16 @@ class RegistrationViewController: UIViewController {
         let origin = CGPoint(x: self.frameView.frame.origin.x, y: self.frameView.frame.origin.y - 4)
         let shadowRect = CGRect(origin: origin,
                                 size: CGSize(width: self.frameView.frame.width + 8, height: self.frameView.frame.height + 8))
+        
+        let widthConstraint = 330/390 * self.view.frame.width
+        let heightConstraint = 500/844 * self.view.frame.height
+        
+        self.frameView.center = self.view.center
+        self.frameView.frame.size = CGSize(width: widthConstraint, height: heightConstraint)
     }
     
     private func setFrameViewConstraints() {
+        
 //        self.frameView.translatesAutoresizingMaskIntoConstraints = false
 //        
 //        let frameViewConstraints: [NSLayoutConstraint] = [

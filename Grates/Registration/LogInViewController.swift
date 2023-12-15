@@ -120,6 +120,12 @@ class LogInViewController: UIViewController {
         let shadowRect = CGRect(origin: origin,
                                 size: CGSize(width: self.frameView.frame.width + 8, height: self.frameView.frame.height + 8))
         
+        let widthConstraint = 330/390 * self.view.frame.width
+        let heightConstraint = 420/844 * self.view.frame.height
+        
+        self.frameView.center = self.view.center
+        self.frameView.frame.size = CGSize(width: widthConstraint, height: heightConstraint)
+    
 //        self.frameView.translatesAutoresizingMaskIntoConstraints = false
 //        
 //        var frameViewConstraints = [NSLayoutConstraint]()

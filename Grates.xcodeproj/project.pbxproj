@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2242029C2B2CEB6E00895E3F /* HaptickManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2242029B2B2CEB6E00895E3F /* HaptickManager.swift */; };
 		22C95F0B2B21370D00EBEC3F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22C95F0A2B21370D00EBEC3F /* AppDelegate.swift */; };
 		22C95F0D2B21370D00EBEC3F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22C95F0C2B21370D00EBEC3F /* SceneDelegate.swift */; };
 		22C95F0F2B21370D00EBEC3F /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22C95F0E2B21370D00EBEC3F /* LogInViewController.swift */; };
@@ -23,6 +24,7 @@
 		22D22DFC2B2B663000134A47 /* MPLUSRounded1c-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 22D22DF52B2B662F00134A47 /* MPLUSRounded1c-Regular.ttf */; };
 		22D22DFD2B2B663000134A47 /* MPLUSRounded1c-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 22D22DF62B2B663000134A47 /* MPLUSRounded1c-Black.ttf */; };
 		22D22DFF2B2BA08000134A47 /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D22DFE2B2BA08000134A47 /* Fonts.swift */; };
+		22D22E022B2CB7B600134A47 /* StrokeLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D22E012B2CB7B600134A47 /* StrokeLabel.swift */; };
 		22DD32CD2B21EFC300B3A72B /* Comfortaa-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 22DD32C82B21EFC300B3A72B /* Comfortaa-SemiBold.ttf */; };
 		22DD32CE2B21EFC300B3A72B /* Comfortaa-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 22DD32C92B21EFC300B3A72B /* Comfortaa-Medium.ttf */; };
 		22DD32D02B21EFC300B3A72B /* Comfortaa-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 22DD32CB2B21EFC300B3A72B /* Comfortaa-Light.ttf */; };
@@ -36,6 +38,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2242029B2B2CEB6E00895E3F /* HaptickManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HaptickManager.swift; sourceTree = "<group>"; };
 		22C95F072B21370D00EBEC3F /* Grates.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Grates.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		22C95F0A2B21370D00EBEC3F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		22C95F0C2B21370D00EBEC3F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -53,6 +56,7 @@
 		22D22DF52B2B662F00134A47 /* MPLUSRounded1c-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "MPLUSRounded1c-Regular.ttf"; sourceTree = "<group>"; };
 		22D22DF62B2B663000134A47 /* MPLUSRounded1c-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "MPLUSRounded1c-Black.ttf"; sourceTree = "<group>"; };
 		22D22DFE2B2BA08000134A47 /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
+		22D22E012B2CB7B600134A47 /* StrokeLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StrokeLabel.swift; sourceTree = "<group>"; };
 		22DD32C82B21EFC300B3A72B /* Comfortaa-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Comfortaa-SemiBold.ttf"; sourceTree = "<group>"; };
 		22DD32C92B21EFC300B3A72B /* Comfortaa-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Comfortaa-Medium.ttf"; sourceTree = "<group>"; };
 		22DD32CB2B21EFC300B3A72B /* Comfortaa-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Comfortaa-Light.ttf"; sourceTree = "<group>"; };
@@ -101,6 +105,7 @@
 				22DD32DF2B23AB9F00B3A72B /* ColorNames.swift */,
 				22DD32E12B23ABA800B3A72B /* SeguesNames.swift */,
 				22D22DFE2B2BA08000134A47 /* Fonts.swift */,
+				2242029B2B2CEB6E00895E3F /* HaptickManager.swift */,
 				22DD32DE2B23AB8500B3A72B /* Registration */,
 				22DD32BB2B21EBC900B3A72B /* RiveAnimations */,
 				22DD32BA2B21EBC300B3A72B /* Fonts */,
@@ -138,6 +143,15 @@
 			path = MPLUS;
 			sourceTree = "<group>";
 		};
+		22D22E002B2CB79800134A47 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				22DD32D82B22072300B3A72B /* RegisterTextField.swift */,
+				22D22E012B2CB7B600134A47 /* StrokeLabel.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		22DD32BA2B21EBC300B3A72B /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
@@ -161,7 +175,7 @@
 				22C95F0E2B21370D00EBEC3F /* LogInViewController.swift */,
 				22DD32DA2B236E0700B3A72B /* RegistrationViewController.swift */,
 				22DD32DC2B23A54700B3A72B /* RegistrationViewsTransition.swift */,
-				22DD32D82B22072300B3A72B /* RegisterTextField.swift */,
+				22D22E002B2CB79800134A47 /* Views */,
 			);
 			path = Registration;
 			sourceTree = "<group>";
@@ -256,12 +270,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				22D22E022B2CB7B600134A47 /* StrokeLabel.swift in Sources */,
 				22DD32DD2B23A54700B3A72B /* RegistrationViewsTransition.swift in Sources */,
 				22DD32D92B22072300B3A72B /* RegisterTextField.swift in Sources */,
 				22C95F0F2B21370D00EBEC3F /* LogInViewController.swift in Sources */,
 				22C95F0B2B21370D00EBEC3F /* AppDelegate.swift in Sources */,
 				22DD32E22B23ABA800B3A72B /* SeguesNames.swift in Sources */,
 				22D22DFF2B2BA08000134A47 /* Fonts.swift in Sources */,
+				2242029C2B2CEB6E00895E3F /* HaptickManager.swift in Sources */,
 				22C95F0D2B21370D00EBEC3F /* SceneDelegate.swift in Sources */,
 				22DD32DB2B236E0700B3A72B /* RegistrationViewController.swift in Sources */,
 				22DD32E02B23AB9F00B3A72B /* ColorNames.swift in Sources */,
