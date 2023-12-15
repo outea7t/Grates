@@ -21,11 +21,11 @@ class LogInViewController: UIViewController {
     @IBOutlet weak var signInButton: UIButton!
     @IBOutlet weak var forgotPasswordButton: UIButton!
     
-    var emailTextField = RegisterTextField(placeholder: "example@email.com")
-    var passwordTextField = RegisterTextField(placeholder: "password")
+    let emailTextField = RegisterTextField(placeholder: "example@email.com")
+    let passwordTextField = RegisterTextField(placeholder: "password")
     
-    private var blurView: UIVisualEffectView?
-    private var gradientView = UIView()
+    var blurView: UIVisualEffectView?
+    let gradientView = UIView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,12 +43,13 @@ class LogInViewController: UIViewController {
         self.setForgotPasswordButton()
         self.view.bringSubviewToFront(self.logoLabel)
         
+        self.frameView.clipsToBounds = true
         // Do any additional setup after loading the view.
     }
     
     
     @IBAction func signUpButtonTapped(_ sender: UIButton) {
-        
+        self.performSegue(withIdentifier: SeguesNames.loginToRegistration.rawValue, sender: self)
     }
     @IBAction func forgotPasswordButtonTapped(_ sender: UIButton) {
         
@@ -270,6 +271,5 @@ class LogInViewController: UIViewController {
         
         NSLayoutConstraint.activate(forgotPasswordConstraints)
     }
-    
 }
 

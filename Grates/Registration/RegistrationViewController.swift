@@ -10,16 +10,16 @@ import UIKit
 
 class RegistrationViewController: UIViewController {
     
-    @IBOutlet private weak var frameView: UIView!
-    @IBOutlet private weak var signUpButton: UIButton!
-    @IBOutlet private weak var logoLabel: UILabel!
-    @IBOutlet private weak var signInButton: UIButton!
-    @IBOutlet private weak var signUpBigButton: UIButton!
+    @IBOutlet weak var frameView: UIView!
+    @IBOutlet weak var signUpButton: UIButton!
+    @IBOutlet weak var logoLabel: UILabel!
+    @IBOutlet weak var signInButton: UIButton!
+    @IBOutlet weak var signUpBigButton: UIButton!
     
-    private let firstNameTextField = RegisterTextField(placeholder: "first name")
-    private let secondNameTextField = RegisterTextField(placeholder: "second name")
-    private let emailTextField = RegisterTextField(placeholder: "example@gmail.com")
-    private let passwordTextField = RegisterTextField(placeholder: "password")
+    let firstNameTextField = RegisterTextField(placeholder: "first name")
+    let secondNameTextField = RegisterTextField(placeholder: "second name")
+    let emailTextField = RegisterTextField(placeholder: "example@gmail.com")
+    let passwordTextField = RegisterTextField(placeholder: "password")
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,6 +32,15 @@ class RegistrationViewController: UIViewController {
         self.setSecondNameTextField()
         self.setEmailTextField()
         self.setPasswordTextField()
+        
+        self.frameView.clipsToBounds = true
+        self.transitioningDelegate = self
+    }
+    
+    @IBAction func signInButtonTapped(_ sender: UIButton) {
+        self.dismiss(animated: true)
+    }
+    @IBAction func signUpBigButtonTapped(_ sender: UIButton) {
     }
     
     private func setSignUpButton() {
@@ -97,7 +106,7 @@ class RegistrationViewController: UIViewController {
             self.frameView.widthAnchor.constraint(equalToConstant: 330)
         )
         frameViewConstraints.append(
-            self.frameView.heightAnchor.constraint(equalToConstant: 475)
+            self.frameView.heightAnchor.constraint(equalToConstant: 500)
         )
         frameViewConstraints.append(
             self.frameView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor)
@@ -126,6 +135,15 @@ class RegistrationViewController: UIViewController {
         
         self.signUpBigButton.layer.shadowPath = shadowPath
         self.signUpBigButton.layer.shadowOffset = CGSize(width: 0, height: 4)
+        
+        let constraints: [NSLayoutConstraint] = [
+            self.signUpBigButton.widthAnchor.constraint(equalToConstant: 275),
+            self.signUpBigButton.heightAnchor.constraint(equalToConstant: 57),
+            self.signUpBigButton.centerXAnchor.constraint(equalTo: self.frameView.centerXAnchor),
+            self.signUpBigButton.bottomAnchor.constraint(equalTo: self.frameView.bottomAnchor, constant: -13)
+        ]
+        
+        NSLayoutConstraint.activate(constraints)
     }
     
     private func setFirstNameTextField() {
@@ -137,7 +155,7 @@ class RegistrationViewController: UIViewController {
         
         constraints.append(self.firstNameTextField.widthAnchor.constraint(equalToConstant: 275))
         constraints.append(self.firstNameTextField.heightAnchor.constraint(equalToConstant: 57))
-        constraints.append(self.firstNameTextField.topAnchor.constraint(equalTo: self.signUpButton.bottomAnchor, constant: 11))
+        constraints.append(self.firstNameTextField.topAnchor.constraint(equalTo: self.signUpButton.bottomAnchor, constant: 40))
         constraints.append(self.firstNameTextField.centerXAnchor.constraint(equalTo: self.frameView.centerXAnchor))
         
         NSLayoutConstraint.activate(constraints)
@@ -183,5 +201,14 @@ class RegistrationViewController: UIViewController {
         ]
         
         NSLayoutConstraint.activate(constraints)
+    }
+}
+
+extension RegistrationViewController: UIViewControllerTransitioningDelegate {
+    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        return RegistrationViewsTransition(animationDuration: 1.5, animationType: .present)
+    }
+    func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        return RegistrationViewsTransition(animationDuration: 1.5, animationType: .dismiss)
     }
 }
