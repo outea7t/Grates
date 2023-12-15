@@ -120,24 +120,24 @@ class LogInViewController: UIViewController {
         let shadowRect = CGRect(origin: origin,
                                 size: CGSize(width: self.frameView.frame.width + 8, height: self.frameView.frame.height + 8))
         
-        self.frameView.translatesAutoresizingMaskIntoConstraints = false
-        
-        var frameViewConstraints = [NSLayoutConstraint]()
-        
-        frameViewConstraints.append(
-            self.frameView.widthAnchor.constraint(equalToConstant: 330)
-        )
-        frameViewConstraints.append(
-            self.frameView.heightAnchor.constraint(equalToConstant: 420)
-        )
-        frameViewConstraints.append(
-            self.frameView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor)
-        )
-        frameViewConstraints.append(
-            self.frameView.centerYAnchor.constraint(equalTo: self.view.centerYAnchor)
-        )
-        
-        NSLayoutConstraint.activate(frameViewConstraints)
+//        self.frameView.translatesAutoresizingMaskIntoConstraints = false
+//        
+//        var frameViewConstraints = [NSLayoutConstraint]()
+//        
+//        frameViewConstraints.append(
+//            self.frameView.widthAnchor.constraint(equalToConstant: 330)
+//        )
+//        frameViewConstraints.append(
+//            self.frameView.heightAnchor.constraint(equalToConstant: 420)
+//        )
+//        frameViewConstraints.append(
+//            self.frameView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor)
+//        )
+//        frameViewConstraints.append(
+//            self.frameView.centerYAnchor.constraint(equalTo: self.view.centerYAnchor)
+//        )
+//        
+//        NSLayoutConstraint.activate(frameViewConstraints)
     }
     
     private func setEmailTextField() {
@@ -205,11 +205,14 @@ class LogInViewController: UIViewController {
     
     private func setSignUpButton() {
         self.signUpButton.translatesAutoresizingMaskIntoConstraints = false
+        self.signUpButton.titleLabel?.numberOfLines = 1
+        self.signUpButton.titleLabel?.lineBreakMode = .byWordWrapping
+        self.signUpButton.titleLabel?.textAlignment = .left
         
         var signUpButtonConstraints = [NSLayoutConstraint]()
         
         signUpButtonConstraints.append(
-            self.signUpButton.widthAnchor.constraint(equalToConstant: 73)
+            self.signUpButton.widthAnchor.constraint(equalToConstant: 130)
         )
         
         signUpButtonConstraints.append(
@@ -217,7 +220,7 @@ class LogInViewController: UIViewController {
         )
         
         signUpButtonConstraints.append(
-            self.signUpButton.leadingAnchor.constraint(equalTo: self.frameView.leadingAnchor, constant: 16)
+            self.signUpButton.leadingAnchor.constraint(equalTo: self.frameView.leadingAnchor, constant: -5)
         )
         
         signUpButtonConstraints.append(
@@ -225,11 +228,12 @@ class LogInViewController: UIViewController {
         )
         
         NSLayoutConstraint.activate(signUpButtonConstraints)
+        
+        self.signUpButton.transform = CGAffineTransformScale(self.signUpButton.transform, 0.5, 0.5)
     }
     
     private func setSignInButton() {
         self.signInButton.translatesAutoresizingMaskIntoConstraints = false
-        
         var signInButtonConstraints = [NSLayoutConstraint]()
         
         signInButtonConstraints.append(

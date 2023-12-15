@@ -28,13 +28,27 @@ class RegistrationViewController: UIViewController {
         self.setSignUpButton()
         self.setFrameView()
         self.setSignUpBigButton()
+        
+        self.frameView.addSubview(self.firstNameTextField)
+        self.frameView.addSubview(self.secondNameTextField)
+        self.frameView.addSubview(self.emailTextField)
+        self.frameView.addSubview(self.passwordTextField)
+        
+        self.frameView.clipsToBounds = true
+        self.transitioningDelegate = self
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+    }
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        self.setFrameViewConstraints()
         self.setFirstNameTextField()
         self.setSecondNameTextField()
         self.setEmailTextField()
         self.setPasswordTextField()
-        
-        self.frameView.clipsToBounds = true
-        self.transitioningDelegate = self
     }
     
     @IBAction func signInButtonTapped(_ sender: UIButton) {
@@ -84,6 +98,8 @@ class RegistrationViewController: UIViewController {
             self.signInButton.topAnchor.constraint(equalTo: self.frameView.topAnchor, constant: 18)
         )
         NSLayoutConstraint.activate(signInButtonConstraints)
+        
+        self.signInButton.transform = CGAffineTransformScale(self.signInButton.transform, 0.5, 0.5)
     }
     
     private func setFrameView() {
@@ -97,27 +113,20 @@ class RegistrationViewController: UIViewController {
         let origin = CGPoint(x: self.frameView.frame.origin.x, y: self.frameView.frame.origin.y - 4)
         let shadowRect = CGRect(origin: origin,
                                 size: CGSize(width: self.frameView.frame.width + 8, height: self.frameView.frame.height + 8))
-        
-        self.frameView.translatesAutoresizingMaskIntoConstraints = false
-        
-        var frameViewConstraints = [NSLayoutConstraint]()
-        
-        frameViewConstraints.append(
-            self.frameView.widthAnchor.constraint(equalToConstant: 330)
-        )
-        frameViewConstraints.append(
-            self.frameView.heightAnchor.constraint(equalToConstant: 500)
-        )
-        frameViewConstraints.append(
-            self.frameView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor)
-        )
-        frameViewConstraints.append(
-            self.frameView.centerYAnchor.constraint(equalTo: self.view.centerYAnchor)
-        )
-        
-        NSLayoutConstraint.activate(frameViewConstraints)
     }
     
+    private func setFrameViewConstraints() {
+//        self.frameView.translatesAutoresizingMaskIntoConstraints = false
+//        
+//        let frameViewConstraints: [NSLayoutConstraint] = [
+//            self.frameView.widthAnchor.constraint(equalToConstant: 330),
+//            self.frameView.heightAnchor.constraint(equalToConstant: 420*1.2),
+//            self.frameView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
+//            self.frameView.centerYAnchor.constraint(equalTo: self.view.centerYAnchor)
+//        ]
+        
+//        NSLayoutConstraint.activate(frameViewConstraints)
+    }
     private func setSignUpBigButton() {
         self.signUpBigButton.tintColor = #colorLiteral(red: 0.1529411765, green: 0, blue: 0.3647058824, alpha: 1)
         self.signUpBigButton.layer.cornerRadius = 13
@@ -136,6 +145,8 @@ class RegistrationViewController: UIViewController {
         self.signUpBigButton.layer.shadowPath = shadowPath
         self.signUpBigButton.layer.shadowOffset = CGSize(width: 0, height: 4)
         
+        self.signUpBigButton.translatesAutoresizingMaskIntoConstraints = false
+        
         let constraints: [NSLayoutConstraint] = [
             self.signUpBigButton.widthAnchor.constraint(equalToConstant: 275),
             self.signUpBigButton.heightAnchor.constraint(equalToConstant: 57),
@@ -147,7 +158,6 @@ class RegistrationViewController: UIViewController {
     }
     
     private func setFirstNameTextField() {
-        self.frameView.addSubview(self.firstNameTextField)
         
         self.firstNameTextField.translatesAutoresizingMaskIntoConstraints = false
         
@@ -161,7 +171,6 @@ class RegistrationViewController: UIViewController {
         NSLayoutConstraint.activate(constraints)
     }
     private func setSecondNameTextField() {
-        self.frameView.addSubview(self.secondNameTextField)
         
         self.secondNameTextField.translatesAutoresizingMaskIntoConstraints = false
         
@@ -175,7 +184,6 @@ class RegistrationViewController: UIViewController {
         NSLayoutConstraint.activate(constraints)
     }
     private func setEmailTextField() {
-        self.frameView.addSubview(self.emailTextField)
         
         self.emailTextField.translatesAutoresizingMaskIntoConstraints = false
         
@@ -189,7 +197,6 @@ class RegistrationViewController: UIViewController {
         NSLayoutConstraint.activate(constraints)
     }
     private func setPasswordTextField() {
-        self.frameView.addSubview(self.passwordTextField)
         
         self.passwordTextField.translatesAutoresizingMaskIntoConstraints = false
         
