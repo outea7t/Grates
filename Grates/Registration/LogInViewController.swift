@@ -21,6 +21,11 @@ class LogInViewController: UIViewController {
     @IBOutlet weak var signInButton: UIButton!
     @IBOutlet weak var forgotPasswordButton: UIButton!
     
+    // для описания появившихся ошибок
+    @IBOutlet weak var errorDescriptionView: UIVisualEffectView!
+    @IBOutlet weak var errorLabel: UILabel!
+    @IBOutlet weak var errorDescriptionLabel: UILabel!
+    
     let emailTextField = RegisterTextField(placeholder: "example@email.com")
     let passwordTextField = RegisterTextField(placeholder: "password")
     

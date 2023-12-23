@@ -8,18 +8,26 @@
 import Foundation
 import UIKit
 
-struct UserInfo: Codable {
+struct UserData: Codable {
     var email: String = ""
     var name: String = ""
     var password: String = ""
     var surname: String = ""
 }
 
-enum UserInfoError: Error {
+// Get
+// Post
+// Put
+// Update
+// Delete
+// Patch
+enum UserDataError: Int, Error {
+    case invalidURL = 1
     /// неправильно составленный запрос
-    case badRequest
+    case badRequest = 2
     /// пользователь уже существует
-    case conflict
+    case conflict = 3
     /// ошибка на сервере
-    case internalServer
+    case internalServer = 4
 }
+

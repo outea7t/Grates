@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2213DA712B379992005FFE07 /* ErrorDescriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2213DA702B379992005FFE07 /* ErrorDescriptionView.swift */; };
+		2213DA732B379D00005FFE07 /* EmailConfiramtionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2213DA722B379D00005FFE07 /* EmailConfiramtionViewController.swift */; };
 		2242029C2B2CEB6E00895E3F /* HaptickManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2242029B2B2CEB6E00895E3F /* HaptickManager.swift */; };
 		2242029E2B2CF4DE00895E3F /* NetworkCallInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2242029D2B2CF4DE00895E3F /* NetworkCallInformation.swift */; };
 		227514E72B3721D5005B1725 /* RegistrationNetworkCall.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227514E62B3721D5005B1725 /* RegistrationNetworkCall.swift */; };
@@ -42,6 +44,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2213DA702B379992005FFE07 /* ErrorDescriptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorDescriptionView.swift; sourceTree = "<group>"; };
+		2213DA722B379D00005FFE07 /* EmailConfiramtionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailConfiramtionViewController.swift; sourceTree = "<group>"; };
 		2242029B2B2CEB6E00895E3F /* HaptickManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HaptickManager.swift; sourceTree = "<group>"; };
 		2242029D2B2CF4DE00895E3F /* NetworkCallInformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkCallInformation.swift; sourceTree = "<group>"; };
 		227514E62B3721D5005B1725 /* RegistrationNetworkCall.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationNetworkCall.swift; sourceTree = "<group>"; };
@@ -89,6 +93,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2213DA6F2B379976005FFE07 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				2213DA702B379992005FFE07 /* ErrorDescriptionView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		227514E82B3721DB005B1725 /* NetworkCalls */ = {
 			isa = PBXGroup;
 			children = (
@@ -137,6 +149,7 @@
 				22C95F0A2B21370D00EBEC3F /* AppDelegate.swift */,
 				22C95F0C2B21370D00EBEC3F /* SceneDelegate.swift */,
 				2242029B2B2CEB6E00895E3F /* HaptickManager.swift */,
+				2213DA6F2B379976005FFE07 /* Views */,
 				22A3EF7D2B365CDF003F25C1 /* InformationFiles */,
 				22DD32DE2B23AB8500B3A72B /* Registration */,
 				22E33D7E2B35F28A00CC931F /* NewsFeed */,
@@ -209,6 +222,7 @@
 				227514E82B3721DB005B1725 /* NetworkCalls */,
 				22C95F0E2B21370D00EBEC3F /* LogInViewController.swift */,
 				22DD32DA2B236E0700B3A72B /* RegistrationViewController.swift */,
+				2213DA722B379D00005FFE07 /* EmailConfiramtionViewController.swift */,
 				22DD32DC2B23A54700B3A72B /* RegistrationViewsTransition.swift */,
 				22E33D7C2B35DFFD00CC931F /* Validator.swift */,
 				22D22E002B2CB79800134A47 /* Views */,
@@ -319,6 +333,7 @@
 				22DD32D92B22072300B3A72B /* RegisterTextField.swift in Sources */,
 				22C95F0F2B21370D00EBEC3F /* LogInViewController.swift in Sources */,
 				22E33D7D2B35DFFD00CC931F /* Validator.swift in Sources */,
+				2213DA732B379D00005FFE07 /* EmailConfiramtionViewController.swift in Sources */,
 				22C95F0B2B21370D00EBEC3F /* AppDelegate.swift in Sources */,
 				22DD32E22B23ABA800B3A72B /* SeguesNames.swift in Sources */,
 				22D22DFF2B2BA08000134A47 /* Fonts.swift in Sources */,
@@ -328,6 +343,7 @@
 				22DD32E02B23AB9F00B3A72B /* ColorNames.swift in Sources */,
 				227514E72B3721D5005B1725 /* RegistrationNetworkCall.swift in Sources */,
 				2242029E2B2CF4DE00895E3F /* NetworkCallInformation.swift in Sources */,
+				2213DA712B379992005FFE07 /* ErrorDescriptionView.swift in Sources */,
 				22E33D802B35F2CF00CC931F /* NewsFeedViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

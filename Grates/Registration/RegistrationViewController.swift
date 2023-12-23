@@ -25,6 +25,12 @@ class RegistrationViewController: UIViewController {
     @IBOutlet weak var signInButton: UIButton!
     @IBOutlet weak var signUpBigButton: UIButton!
     
+    // для описания появившихся ошибок
+    @IBOutlet weak var errorDescriptionView: UIVisualEffectView!
+    @IBOutlet weak var errorLabel: UILabel!
+    @IBOutlet weak var errorDescriptionLabel: UILabel!
+    
+    
     let firstNameTextField = RegisterTextField(placeholder: "first name")
     let secondNameTextField = RegisterTextField(placeholder: "second name")
     let emailTextField = RegisterTextField(placeholder: "example@gmail.com")
@@ -33,7 +39,9 @@ class RegistrationViewController: UIViewController {
     private var isKeyboardShown = false
     private var textFieldType = TypeOfTextField.firstName
     
-    private var user = UserInfo()
+    private var user = UserData()
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -114,11 +122,71 @@ class RegistrationViewController: UIViewController {
     }
     
     @IBAction func signUpBigButtonTapped(_ sender: UIButton) {
-        
+        self.handleRedisterRequest()
     }
     
-    func register() async throws {
+    private func handleRedisterRequest() {
+        DispatchQueue.global().async {
+            do {
+                try self.register()
+            } catch {
+                
+            }
+        }
+    }
+    
+    // TODO: Сделать обработку всех ошибок
+    private func register() throws {
+        guard self.user.name != "" && self.user.surname != "" &&
+                self.user.email != "" && self.user.password != "" else {
+            
+            return
+        }
         let endPoint = NetworkCallInformation.Registration.authSignUp
+        
+        guard let url = URL(string: endPoint) else {
+            throw UserDataError.invalidURL
+        }
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        let encoder = JSONEncoder()
+        encoder.keyEncodingStrategy = .useDefaultKeys
+        let jsonData = try encoder.encode(self.user)
+        request.httpBody = jsonData
+        
+        let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
+            if let error = error {
+                print("Error in request: \(error)")
+                return
+            }
+            
+            do {
+                guard let httpResponse = response as? HTTPURLResponse else {
+                    throw UserDataError.invalidURL
+                }
+                
+                if httpResponse.statusCode == 400 {
+                    throw UserDataError.badRequest
+                } else if httpResponse.statusCode == 409 {
+                    throw UserDataError.conflict
+                } else if httpResponse.statusCode == 500 {
+                    throw UserDataError.internalServer
+                }
+                if httpResponse.statusCode == 200 {
+                    print("SUCCESS")
+                }
+            }
+            catch {
+                guard let currentError = error as? UserDataError else {
+                    
+                    return
+                }
+            }
+        }
+        task.resume()
     }
     
 }
@@ -382,6 +450,21 @@ extension RegistrationViewController {
         ]
         
         NSLayoutConstraint.activate(constraints)
+    }
+    
+    private func setErrorDescriptionView() {
+        self.errorDescriptionView.effect = UIBlurEffect(style: .systemUltraThinMaterialDark)
+        
+        self.errorDescriptionView.translatesAutoresizingMaskIntoConstraints = false
+        
+        let constraints: [NSLayoutConstraint] = [
+            self.errorDescriptionView.widthAnchor.constraint(equalToConstant: 370),
+            self.errorDescriptionView.heightAnchor.constraint(equalToConstant: 90),
+            self.errorDescriptionView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
+            self.errorDescriptionView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 45)
+        ]
+        NSLayoutConstraint.activate(constraints)
+        
     }
 }
 
