@@ -27,6 +27,7 @@ class LogInViewController: UIViewController {
     var blurView: UIVisualEffectView?
     let gradientView = UIView()
     
+    private var isKeyboardShown = false
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -44,9 +45,43 @@ class LogInViewController: UIViewController {
         self.view.bringSubviewToFront(self.logoLabel)
         
         self.frameView.clipsToBounds = true
-        // Do any additional setup after loading the view.
+        self.emailTextField.delegate = self
+        self.passwordTextField.delegate = self
+        
+        // отмена набора текста, когда пользователь нажимает на экран вне клавиатуры
+        let keyboardDismissGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        self.view.addGestureRecognizer(keyboardDismissGesture)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
+    // вызывается, когда клавиатура появится на экране
+    // сделано для того, чтобы передвигать невидимые поля в зону видимости
+    @objc private func keyboardWillShow() {
+        guard self.isKeyboardShown == false else {
+            return
+        }
+        self.isKeyboardShown = true
+        UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseInOut) {
+            self.frameView.layer.position.y -= 50
+        }
+    }
+    
+    // вызывается, когда клавиатура исчезает с экрана
+    @objc private func keyboardWillHide() {
+        UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseInOut) {
+            self.frameView.layer.position.y += 50
+        } completion: { isFinished in
+            self.isKeyboardShown = false
+        }
+        
+    }
+    
+    @objc private func dismissKeyboard() {
+        self.view.endEditing(true)
+    }
     
     @IBAction func signUpButtonTapped(_ sender: UIButton) {
         self.performSegue(withIdentifier: SeguesNames.loginToRegistration.rawValue, sender: self)
@@ -57,7 +92,47 @@ class LogInViewController: UIViewController {
     @IBAction func LogInButtonTapped(_ sender: UIButton) {
         
     }
+}
+
+extension LogInViewController: UITextFieldDelegate {
+    // убираем/показываем клавиатуру при нажатии на view
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if textField == self.emailTextField {
+            passwordTextField.becomeFirstResponder()
+        } else {
+            textField.resignFirstResponder()
+        }
+        
+        return true
+    }
     
+    // TODO: Добавить валидацию
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        
+        switch textField {
+        case emailTextField:
+            break
+        case passwordTextField:
+            break
+            
+        default:
+            break
+        }
+        
+        return true
+    }
+    
+    // TODO: Сделать возможность показать кнопку "сделать пароль видимым"
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        guard textField == self.passwordTextField else {
+            return
+        }
+        
+    }
+}
+
+// устанавливаем констрейнты и настраиваем UI
+extension LogInViewController {
     // настраиваем градиент на фоне
     private func setGradientLayer() {
         self.gradientView.frame = self.view.bounds
@@ -74,6 +149,7 @@ class LogInViewController: UIViewController {
         self.view.addSubview(self.gradientView)
         self.view.sendSubviewToBack(self.gradientView)
     }
+    
     // настройка фоновой анимации
     private func setRiveView() {
         // настраиваем riveView
@@ -89,6 +165,7 @@ class LogInViewController: UIViewController {
         self.backgroundView.frame = self.view.bounds
         self.backgroundView.center = self.view.center
     }
+    
     // настройка blur view
     private func setBlurView() {
         let blurView = UIVisualEffectView(effect: UIBlurEffect(style: .systemUltraThinMaterialDark))
@@ -108,6 +185,7 @@ class LogInViewController: UIViewController {
         self.view.bringSubviewToFront(blurView)
         self.blurView = blurView
     }
+    
     // настраиваем задний фон для окна регистрации
     private func setFrameView() {
         self.view.bringSubviewToFront(self.frameView)
@@ -117,7 +195,7 @@ class LogInViewController: UIViewController {
         self.frameView.layer.shadowOffset = CGSize(width: 0, height: 4)
         
         let origin = CGPoint(x: self.frameView.frame.origin.x, y: self.frameView.frame.origin.y - 4)
-        let shadowRect = CGRect(origin: origin,
+        let _ = CGRect(origin: origin,
                                 size: CGSize(width: self.frameView.frame.width + 8, height: self.frameView.frame.height + 8))
         
         let widthConstraint = 330/390 * self.view.frame.width
@@ -126,29 +204,17 @@ class LogInViewController: UIViewController {
         self.frameView.center = self.view.center
         self.frameView.frame.size = CGSize(width: widthConstraint, height: heightConstraint)
     
-//        self.frameView.translatesAutoresizingMaskIntoConstraints = false
-//        
-//        var frameViewConstraints = [NSLayoutConstraint]()
-//        
-//        frameViewConstraints.append(
-//            self.frameView.widthAnchor.constraint(equalToConstant: 330)
-//        )
-//        frameViewConstraints.append(
-//            self.frameView.heightAnchor.constraint(equalToConstant: 420)
-//        )
-//        frameViewConstraints.append(
-//            self.frameView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor)
-//        )
-//        frameViewConstraints.append(
-//            self.frameView.centerYAnchor.constraint(equalTo: self.view.centerYAnchor)
-//        )
-//        
-//        NSLayoutConstraint.activate(frameViewConstraints)
     }
     
     private func setEmailTextField() {
         self.frameView.addSubview(self.emailTextField)
         self.frameView.bringSubviewToFront(self.emailTextField)
+        
+        self.emailTextField.keyboardType = .emailAddress
+        self.emailTextField.clearButtonMode = .never
+        self.emailTextField.textContentType = .emailAddress
+        self.emailTextField.autocapitalizationType = .none
+        self.emailTextField.returnKeyType = .next
         
         self.emailTextField.translatesAutoresizingMaskIntoConstraints = false
         var emailTextFieldConstraints = [NSLayoutConstraint]()
@@ -171,6 +237,13 @@ class LogInViewController: UIViewController {
     private func setPasswordTextField() {
         self.frameView.addSubview(self.passwordTextField)
         self.frameView.bringSubviewToFront(self.passwordTextField)
+        
+        self.passwordTextField.keyboardType = .default
+        self.passwordTextField.clearButtonMode = .never
+        self.passwordTextField.textContentType = .password
+        self.passwordTextField.returnKeyType = .go
+        self.passwordTextField.isSecureTextEntry = true
+        
         
         self.passwordTextField.translatesAutoresizingMaskIntoConstraints = false
         var passwordTextFieldConstraints = [NSLayoutConstraint]()
@@ -218,11 +291,11 @@ class LogInViewController: UIViewController {
         var signUpButtonConstraints = [NSLayoutConstraint]()
         
         signUpButtonConstraints.append(
-            self.signUpButton.widthAnchor.constraint(equalToConstant: 130)
+            self.signUpButton.widthAnchor.constraint(equalToConstant: 140)
         )
         
         signUpButtonConstraints.append(
-            self.signUpButton.heightAnchor.constraint(equalToConstant: 25)
+            self.signUpButton.heightAnchor.constraint(equalToConstant: 45)
         )
         
         signUpButtonConstraints.append(
@@ -230,7 +303,7 @@ class LogInViewController: UIViewController {
         )
         
         signUpButtonConstraints.append(
-            self.signUpButton.topAnchor.constraint(equalTo: self.frameView.topAnchor, constant: 33)
+            self.signUpButton.topAnchor.constraint(equalTo: self.frameView.topAnchor, constant: 18)
         )
         
         NSLayoutConstraint.activate(signUpButtonConstraints)
@@ -243,11 +316,11 @@ class LogInViewController: UIViewController {
         var signInButtonConstraints = [NSLayoutConstraint]()
         
         signInButtonConstraints.append(
-            self.signInButton.widthAnchor.constraint(equalToConstant: 114)
+            self.signInButton.widthAnchor.constraint(equalToConstant: 115)
         )
         
         signInButtonConstraints.append(
-            self.signInButton.heightAnchor.constraint(equalToConstant: 46)
+            self.signInButton.heightAnchor.constraint(equalToConstant: 45)
         )
         
         signInButtonConstraints.append(
@@ -255,7 +328,7 @@ class LogInViewController: UIViewController {
         )
         
         signInButtonConstraints.append(
-            self.signInButton.topAnchor.constraint(equalTo: self.frameView.topAnchor, constant: 22)
+            self.signInButton.topAnchor.constraint(equalTo: self.frameView.topAnchor, constant: 15)
         )
         
         NSLayoutConstraint.activate(signInButtonConstraints)
@@ -282,4 +355,3 @@ class LogInViewController: UIViewController {
         NSLayoutConstraint.activate(forgotPasswordConstraints)
     }
 }
-

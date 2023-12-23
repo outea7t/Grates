@@ -136,6 +136,9 @@ extension RegistrationViewsTransition: UIViewControllerAnimatedTransitioning {
         
         let toFrame = registrationViewController.frameView.frame
         let toSignUpBigButtonFrame = registrationViewController.signUpBigButton.frame
+//        let positionOfSignInButton = logInViewController.signInButton.convert(logInViewController.signInButton.frame.origin,
+//                                                                              logInViewController.view.coordinateSpace)
+        
         
         registrationViewController.frameView.frame.size = logInViewController.frameView.frame.size
         registrationViewController.frameView.frame.origin = logInViewController.frameView.frame.origin

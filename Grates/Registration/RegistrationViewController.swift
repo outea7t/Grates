@@ -8,6 +8,15 @@
 import Foundation
 import UIKit
 
+/// типы всех полей ввода текста
+/// для того, чтобы мы могли определить степень сдвига, применяемого к frameView
+fileprivate enum TypeOfTextField {
+    case firstName
+    case secondName
+    case email
+    case password
+}
+
 class RegistrationViewController: UIViewController {
     
     @IBOutlet weak var frameView: UIView!
@@ -21,6 +30,11 @@ class RegistrationViewController: UIViewController {
     let emailTextField = RegisterTextField(placeholder: "example@gmail.com")
     let passwordTextField = RegisterTextField(placeholder: "password")
     
+    private var isKeyboardShown = false
+    private var textFieldType = TypeOfTextField.firstName
+    
+    private var user = UserInfo()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -29,12 +43,18 @@ class RegistrationViewController: UIViewController {
         self.setFrameView()
         self.setSignUpBigButton()
         
-        self.frameView.addSubview(self.firstNameTextField)
+        
         self.frameView.addSubview(self.secondNameTextField)
         self.frameView.addSubview(self.emailTextField)
         self.frameView.addSubview(self.passwordTextField)
         
         self.frameView.clipsToBounds = true
+        
+        self.firstNameTextField.delegate = self
+        self.secondNameTextField.delegate = self
+        self.emailTextField.delegate = self
+        self.passwordTextField.delegate = self
+        
         self.transitioningDelegate = self
     }
     override func viewWillAppear(_ animated: Bool) {
@@ -44,30 +64,158 @@ class RegistrationViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        self.setFrameViewConstraints()
         self.setFirstNameTextField()
         self.setSecondNameTextField()
         self.setEmailTextField()
         self.setPasswordTextField()
+        
+        // отмена набора текста, когда пользователь нажимает на экран вне клавиатуры
+        let keyboardDismissGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        self.view.addGestureRecognizer(keyboardDismissGesture)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    // вызывается, когда клавиатура появится на экране
+    // сделано для того, чтобы передвигать невидимые поля в зону видимости
+    @objc private func keyboardWillShow() {
+        guard self.isKeyboardShown == false else {
+            return
+        }
+        self.isKeyboardShown = true
+        
+        let offset = 75
+        
+        UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseInOut) {
+            self.frameView.layer.position.y -= CGFloat(offset)
+        }
+    }
+    
+    // вызывается, когда клавиатура исчезает с экрана
+    @objc private func keyboardWillHide() {
+        let offset = 75
+        
+        UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseInOut) {
+            self.frameView.layer.position.y += CGFloat(offset)
+        } completion: { isFinished in
+            self.isKeyboardShown = false
+        }
+        
+    }
+    
+    @objc private func dismissKeyboard() {
+        self.view.endEditing(true)
     }
     
     @IBAction func signInButtonTapped(_ sender: UIButton) {
         self.dismiss(animated: true)
     }
+    
     @IBAction func signUpBigButtonTapped(_ sender: UIButton) {
+        
     }
     
+    func register() async throws {
+        let endPoint = NetworkCallInformation.Registration.authSignUp
+    }
+    
+}
+
+extension RegistrationViewController {
+    
+}
+
+extension RegistrationViewController: UITextFieldDelegate {
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        if textField == self.firstNameTextField {
+            self.textFieldType = .firstName
+        }
+        else if textField == self.secondNameTextField {
+            self.textFieldType = .secondName
+        }
+        else if textField == self.emailTextField {
+            self.textFieldType = .email
+        }
+        else if textField == self.passwordTextField {
+            self.textFieldType = .password
+        }
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        
+        if textField == self.firstNameTextField {
+            self.secondNameTextField.becomeFirstResponder()
+        }
+        else if textField == self.secondNameTextField {
+            self.emailTextField.becomeFirstResponder()
+        }
+        else if textField == self.emailTextField {
+            passwordTextField.becomeFirstResponder()
+        }
+        else {
+            textField.resignFirstResponder()
+        }
+        
+        return true
+    }
+    
+    // TODO: Добавить валидацию
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        
+        switch textField {
+        case emailTextField:
+            break
+        case passwordTextField:
+            break
+            
+        default:
+            break
+        }
+        
+        return true
+    }
+    
+    // TODO: Сделать возможность показать кнопку "сделать пароль видимым"
+    func textFieldDidEndEditing(_ textField: UITextField) {
+//        guard textField == self.passwordTextField else {
+//            return
+//        }
+        
+        if textField == self.firstNameTextField {
+            self.user.name = textField.text ?? ""
+            print(textField.text)
+        }
+        else if textField == self.secondNameTextField {
+            self.user.surname = textField.text ?? ""
+            print(textField.text)
+        }
+        else if textField == self.emailTextField {
+            self.user.email = textField.text ?? ""
+            print(textField.text)
+        }
+        else if textField == self.passwordTextField {
+            self.user.password = textField.text ?? ""
+            print(textField.text)
+        }
+        
+    }
+}
+
+// настраиваем все view
+extension RegistrationViewController {
     private func setSignUpButton() {
         self.signUpButton.translatesAutoresizingMaskIntoConstraints = false
         
         var signUpButtonConstraints = [NSLayoutConstraint]()
         
         signUpButtonConstraints.append(
-            self.signUpButton.widthAnchor.constraint(equalToConstant: 146)
+            self.signUpButton.widthAnchor.constraint(equalToConstant: 140)
         )
         
         signUpButtonConstraints.append(
-            self.signUpButton.heightAnchor.constraint(equalToConstant: 46)
+            self.signUpButton.heightAnchor.constraint(equalToConstant: 45)
         )
         
         signUpButtonConstraints.append(
@@ -86,13 +234,13 @@ class RegistrationViewController: UIViewController {
         var signInButtonConstraints = [NSLayoutConstraint]()
         
         signInButtonConstraints.append(
-            self.signInButton.widthAnchor.constraint(equalToConstant: 150)
+            self.signInButton.widthAnchor.constraint(equalToConstant: 115)
         )
         signInButtonConstraints.append(
-            self.signInButton.heightAnchor.constraint(equalToConstant: 50)
+            self.signInButton.heightAnchor.constraint(equalToConstant: 45)
         )
         signInButtonConstraints.append(
-            self.signInButton.trailingAnchor.constraint(equalTo: self.frameView.trailingAnchor, constant: 0)
+            self.signInButton.trailingAnchor.constraint(equalTo: self.frameView.trailingAnchor, constant: -5)
         )
         signInButtonConstraints.append(
             self.signInButton.topAnchor.constraint(equalTo: self.frameView.topAnchor, constant: 18)
@@ -121,19 +269,6 @@ class RegistrationViewController: UIViewController {
         self.frameView.frame.size = CGSize(width: widthConstraint, height: heightConstraint)
     }
     
-    private func setFrameViewConstraints() {
-        
-//        self.frameView.translatesAutoresizingMaskIntoConstraints = false
-//        
-//        let frameViewConstraints: [NSLayoutConstraint] = [
-//            self.frameView.widthAnchor.constraint(equalToConstant: 330),
-//            self.frameView.heightAnchor.constraint(equalToConstant: 420*1.2),
-//            self.frameView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
-//            self.frameView.centerYAnchor.constraint(equalTo: self.view.centerYAnchor)
-//        ]
-        
-//        NSLayoutConstraint.activate(frameViewConstraints)
-    }
     private func setSignUpBigButton() {
         self.signUpBigButton.tintColor = #colorLiteral(red: 0.1529411765, green: 0, blue: 0.3647058824, alpha: 1)
         self.signUpBigButton.layer.cornerRadius = 13
@@ -165,6 +300,14 @@ class RegistrationViewController: UIViewController {
     }
     
     private func setFirstNameTextField() {
+        self.frameView.addSubview(self.firstNameTextField)
+        self.frameView.bringSubviewToFront(self.firstNameTextField)
+        
+        self.secondNameTextField.keyboardType = .default
+        self.secondNameTextField.clearButtonMode = .never
+        self.secondNameTextField.textContentType = .givenName
+        self.secondNameTextField.autocapitalizationType = .words
+        self.secondNameTextField.returnKeyType = .next
         
         self.firstNameTextField.translatesAutoresizingMaskIntoConstraints = false
         
@@ -178,6 +321,14 @@ class RegistrationViewController: UIViewController {
         NSLayoutConstraint.activate(constraints)
     }
     private func setSecondNameTextField() {
+        self.frameView.addSubview(self.secondNameTextField)
+        self.frameView.bringSubviewToFront(self.secondNameTextField)
+        
+        self.secondNameTextField.keyboardType = .default
+        self.secondNameTextField.clearButtonMode = .never
+        self.secondNameTextField.textContentType = .familyName
+        self.secondNameTextField.autocapitalizationType = .words
+        self.secondNameTextField.returnKeyType = .next
         
         self.secondNameTextField.translatesAutoresizingMaskIntoConstraints = false
         
@@ -191,6 +342,14 @@ class RegistrationViewController: UIViewController {
         NSLayoutConstraint.activate(constraints)
     }
     private func setEmailTextField() {
+        self.frameView.addSubview(self.emailTextField)
+        self.frameView.bringSubviewToFront(self.emailTextField)
+        
+        self.emailTextField.keyboardType = .emailAddress
+        self.emailTextField.clearButtonMode = .never
+        self.emailTextField.textContentType = .emailAddress
+        self.emailTextField.autocapitalizationType = .none
+        self.emailTextField.returnKeyType = .next
         
         self.emailTextField.translatesAutoresizingMaskIntoConstraints = false
         
@@ -204,6 +363,14 @@ class RegistrationViewController: UIViewController {
         NSLayoutConstraint.activate(constraints)
     }
     private func setPasswordTextField() {
+        self.frameView.addSubview(self.passwordTextField)
+        self.frameView.bringSubviewToFront(self.passwordTextField)
+        
+        self.passwordTextField.keyboardType = .default
+        self.passwordTextField.clearButtonMode = .never
+        self.passwordTextField.textContentType = .password
+        self.passwordTextField.returnKeyType = .go
+        self.passwordTextField.isSecureTextEntry = true
         
         self.passwordTextField.translatesAutoresizingMaskIntoConstraints = false
         
@@ -218,6 +385,7 @@ class RegistrationViewController: UIViewController {
     }
 }
 
+// переход с меню входа на меню регистрации
 extension RegistrationViewController: UIViewControllerTransitioningDelegate {
     func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         return RegistrationViewsTransition(animationDuration: 1.5, animationType: .present)

@@ -6,11 +6,6 @@
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
-    <customFonts key="customFonts">
-        <array key="Comfortaa-Bold.ttf">
-            <string>Comfortaa-Bold</string>
-        </array>
-    </customFonts>
     <scenes>
         <!--View Controller-->
         <scene sceneID="EHf-IW-A2E">
@@ -21,26 +16,27 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LogoShape" translatesAutoresizingMaskIntoConstraints="NO" id="luZ-VW-OVG">
-                                <rect key="frame" x="119" y="291" width="155" height="150"/>
+                                <rect key="frame" x="116" y="291" width="155" height="150"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="155" id="8sQ-7Z-aod"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Grates" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uaV-YW-yRd">
-                                <rect key="frame" x="92.666666666666686" y="470" width="208" height="67"/>
-                                <fontDescription key="fontDescription" name="Comfortaa-Bold" family="Comfortaa" pointSize="60"/>
-                                <color key="textColor" red="0.15686275059999999" green="0.13725490870000001" blue="0.2823529541" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Grates" translatesAutoresizingMaskIntoConstraints="NO" id="fBm-Ro-F0s">
+                                <rect key="frame" x="97.666666666666686" y="441" width="198" height="93"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="93" id="aca-qf-YEa"/>
+                                    <constraint firstAttribute="width" constant="198" id="iVb-Bl-BQZ"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" red="0.83529412749999998" green="0.89411771299999998" blue="0.99215686319999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="luZ-VW-OVG" secondAttribute="bottom" constant="377" id="ENi-Co-YVR"/>
-                            <constraint firstItem="uaV-YW-yRd" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="bak-s7-1de"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="uaV-YW-yRd" secondAttribute="bottom" constant="281" id="dbT-If-Xd4"/>
-                            <constraint firstItem="luZ-VW-OVG" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="fMs-mL-vnc"/>
+                            <constraint firstItem="fBm-Ro-F0s" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="Kuc-oH-hNZ"/>
+                            <constraint firstItem="luZ-VW-OVG" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" constant="-3" id="fMs-mL-vnc"/>
                             <constraint firstItem="luZ-VW-OVG" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="232" id="pd8-g3-uLe"/>
+                            <constraint firstItem="fBm-Ro-F0s" firstAttribute="top" secondItem="luZ-VW-OVG" secondAttribute="bottom" id="qmm-DE-nBZ"/>
                         </constraints>
                     </view>
                 </viewController>
@@ -50,6 +46,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Grates" width="829" height="201"/>
         <image name="LogoShape" width="1080" height="1165"/>
     </resources>
 </document>
