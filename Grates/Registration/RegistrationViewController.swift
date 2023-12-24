@@ -26,10 +26,9 @@ class RegistrationViewController: UIViewController {
     @IBOutlet weak var signUpBigButton: UIButton!
     
     // для описания появившихся ошибок
-    @IBOutlet weak var errorDescriptionView: UIVisualEffectView!
-    @IBOutlet weak var errorLabel: UILabel!
-    @IBOutlet weak var errorDescriptionLabel: UILabel!
-    
+    private let errorDescriptionView = ErrorDescriptionView(effect: UIBlurEffect(style: .systemUltraThinMaterialDark), errorDescription: "Your error message here.")
+    // для анимации view с описанием ошибки
+    private var errorTopConstraint: NSLayoutConstraint?
     
     let firstNameTextField = RegisterTextField(placeholder: "first name")
     let secondNameTextField = RegisterTextField(placeholder: "second name")
@@ -41,8 +40,6 @@ class RegistrationViewController: UIViewController {
     
     private var user = UserData()
     
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -50,7 +47,7 @@ class RegistrationViewController: UIViewController {
         self.setSignUpButton()
         self.setFrameView()
         self.setSignUpBigButton()
-        
+        self.setErrorDescriptionView()
         
         self.frameView.addSubview(self.secondNameTextField)
         self.frameView.addSubview(self.emailTextField)
@@ -453,18 +450,16 @@ extension RegistrationViewController {
     }
     
     private func setErrorDescriptionView() {
-        self.errorDescriptionView.effect = UIBlurEffect(style: .systemUltraThinMaterialDark)
-        
         self.errorDescriptionView.translatesAutoresizingMaskIntoConstraints = false
         
+        let topConstraint = self.errorDescriptionView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 45)
         let constraints: [NSLayoutConstraint] = [
             self.errorDescriptionView.widthAnchor.constraint(equalToConstant: 370),
             self.errorDescriptionView.heightAnchor.constraint(equalToConstant: 90),
             self.errorDescriptionView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
-            self.errorDescriptionView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 45)
+            topConstraint
         ]
         NSLayoutConstraint.activate(constraints)
-        
     }
 }
 

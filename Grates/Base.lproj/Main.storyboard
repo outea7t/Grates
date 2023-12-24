@@ -91,40 +91,11 @@
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <visualEffectView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="t0g-xC-zJE">
-                                <rect key="frame" x="11" y="64" width="370" height="90"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="BIx-bZ-aRo">
-                                    <rect key="frame" x="0.0" y="0.0" width="370" height="90"/>
-                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                    <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Error" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jC5-Vu-RHW">
-                                            <rect key="frame" x="14" y="8" width="68" height="25"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="18"/>
-                                            <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Your error description is here. Your error description is here. Your error description is here." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jjG-ly-qM8">
-                                            <rect key="frame" x="14" y="27" width="336" height="56"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="14"/>
-                                            <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                    </subviews>
-                                </view>
-                                <color key="backgroundColor" red="1" green="0.18431372549019609" blue="0.18431372549019609" alpha="0.5" colorSpace="custom" customColorSpace="displayP3"/>
-                                <blurEffect style="regular"/>
-                            </visualEffectView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                     <connections>
-                        <outlet property="errorDescriptionLabel" destination="jjG-ly-qM8" id="UoF-rm-VjC"/>
-                        <outlet property="errorDescriptionView" destination="t0g-xC-zJE" id="XZK-L5-gdg"/>
-                        <outlet property="errorLabel" destination="jC5-Vu-RHW" id="FEj-gW-gkt"/>
                         <outlet property="forgotPasswordButton" destination="Xf0-zm-Kiv" id="HPO-1t-heH"/>
                         <outlet property="frameView" destination="Z2I-Cb-6fi" id="b6L-bH-znw"/>
                         <outlet property="logInButton" destination="yF5-vb-Hc9" id="Eiv-08-q0I"/>
@@ -192,40 +163,11 @@
                                 </subviews>
                                 <color key="backgroundColor" red="0.90196079019999997" green="0.94509804249999996" blue="0.99607843159999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             </view>
-                            <visualEffectView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hQT-6p-cJi">
-                                <rect key="frame" x="11" y="61" width="370" height="90"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="6f7-cZ-nOP">
-                                    <rect key="frame" x="0.0" y="0.0" width="370" height="90"/>
-                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                    <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Error" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sog-ZZ-UaT">
-                                            <rect key="frame" x="14" y="8" width="68" height="25"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="18"/>
-                                            <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Your error description is here. Your error description is here. Your error description is here." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uOH-HC-Shu">
-                                            <rect key="frame" x="14" y="27" width="336" height="56"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <fontDescription key="fontDescription" name="Comfortaa-Regular" family="Comfortaa" pointSize="14"/>
-                                            <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                    </subviews>
-                                </view>
-                                <color key="backgroundColor" red="1" green="0.1843137255" blue="0.1843137255" alpha="0.5" colorSpace="custom" customColorSpace="displayP3"/>
-                                <blurEffect style="regular"/>
-                            </visualEffectView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="eWh-zu-3dB"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </view>
                     <connections>
-                        <outlet property="errorDescriptionLabel" destination="uOH-HC-Shu" id="tj5-CT-fDo"/>
-                        <outlet property="errorDescriptionView" destination="hQT-6p-cJi" id="aTu-S9-iKK"/>
-                        <outlet property="errorLabel" destination="sog-ZZ-UaT" id="eIu-bo-Pwu"/>
                         <outlet property="frameView" destination="Axw-16-t2O" id="En2-KV-F12"/>
                         <outlet property="logoLabel" destination="4OE-yL-qnn" id="81o-mI-bvk"/>
                         <outlet property="signInButton" destination="tzP-ej-5SM" id="gwd-8Y-uwF"/>
