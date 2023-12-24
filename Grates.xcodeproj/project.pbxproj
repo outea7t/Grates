@@ -13,6 +13,9 @@
 		2242029E2B2CF4DE00895E3F /* NetworkCallInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2242029D2B2CF4DE00895E3F /* NetworkCallInformation.swift */; };
 		227514E72B3721D5005B1725 /* RegistrationNetworkCall.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227514E62B3721D5005B1725 /* RegistrationNetworkCall.swift */; };
 		2299C4502B37B2EC0073F705 /* NetworkCallManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2299C44F2B37B2EC0073F705 /* NetworkCallManager.swift */; };
+		229EA2722B38A20500F3333A /* loadinganimation.riv in Resources */ = {isa = PBXBuildFile; fileRef = 229EA2712B38A20500F3333A /* loadinganimation.riv */; };
+		229EA2742B38D99900F3333A /* SuccessDescriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229EA2732B38D99900F3333A /* SuccessDescriptionView.swift */; };
+		229EA2762B38D9CA00F3333A /* NotificationDescriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229EA2752B38D9CA00F3333A /* NotificationDescriptionView.swift */; };
 		22C95F0B2B21370D00EBEC3F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22C95F0A2B21370D00EBEC3F /* AppDelegate.swift */; };
 		22C95F0D2B21370D00EBEC3F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22C95F0C2B21370D00EBEC3F /* SceneDelegate.swift */; };
 		22C95F0F2B21370D00EBEC3F /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22C95F0E2B21370D00EBEC3F /* LogInViewController.swift */; };
@@ -51,6 +54,9 @@
 		2242029D2B2CF4DE00895E3F /* NetworkCallInformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkCallInformation.swift; sourceTree = "<group>"; };
 		227514E62B3721D5005B1725 /* RegistrationNetworkCall.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationNetworkCall.swift; sourceTree = "<group>"; };
 		2299C44F2B37B2EC0073F705 /* NetworkCallManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkCallManager.swift; sourceTree = "<group>"; };
+		229EA2712B38A20500F3333A /* loadinganimation.riv */ = {isa = PBXFileReference; lastKnownFileType = file; path = loadinganimation.riv; sourceTree = "<group>"; };
+		229EA2732B38D99900F3333A /* SuccessDescriptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuccessDescriptionView.swift; sourceTree = "<group>"; };
+		229EA2752B38D9CA00F3333A /* NotificationDescriptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationDescriptionView.swift; sourceTree = "<group>"; };
 		22C95F072B21370D00EBEC3F /* Grates.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Grates.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		22C95F0A2B21370D00EBEC3F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		22C95F0C2B21370D00EBEC3F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -99,6 +105,8 @@
 			isa = PBXGroup;
 			children = (
 				2213DA702B379992005FFE07 /* ErrorDescriptionView.swift */,
+				229EA2732B38D99900F3333A /* SuccessDescriptionView.swift */,
+				229EA2752B38D9CA00F3333A /* NotificationDescriptionView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -223,6 +231,7 @@
 			isa = PBXGroup;
 			children = (
 				22C95F212B21398000EBEC3F /* shapesanimation.riv */,
+				229EA2712B38A20500F3333A /* loadinganimation.riv */,
 			);
 			path = RiveAnimations;
 			sourceTree = "<group>";
@@ -329,6 +338,7 @@
 				22C95F122B21370D00EBEC3F /* Main.storyboard in Resources */,
 				22DD32D12B21EFC300B3A72B /* Comfortaa-Bold.ttf in Resources */,
 				22D22DF92B2B663000134A47 /* MPLUSRounded1c-Bold.ttf in Resources */,
+				229EA2722B38A20500F3333A /* loadinganimation.riv in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -339,11 +349,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				229EA2742B38D99900F3333A /* SuccessDescriptionView.swift in Sources */,
 				22D22E022B2CB7B600134A47 /* StrokeLabel.swift in Sources */,
 				22DD32DD2B23A54700B3A72B /* RegistrationViewsTransition.swift in Sources */,
 				22DD32D92B22072300B3A72B /* RegisterTextField.swift in Sources */,
 				22C95F0F2B21370D00EBEC3F /* LogInViewController.swift in Sources */,
 				22E33D7D2B35DFFD00CC931F /* Validator.swift in Sources */,
+				229EA2762B38D9CA00F3333A /* NotificationDescriptionView.swift in Sources */,
 				2213DA732B379D00005FFE07 /* EmailConfiramtionViewController.swift in Sources */,
 				22C95F0B2B21370D00EBEC3F /* AppDelegate.swift in Sources */,
 				22DD32E22B23ABA800B3A72B /* SeguesNames.swift in Sources */,

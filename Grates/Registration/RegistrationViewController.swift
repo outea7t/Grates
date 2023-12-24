@@ -36,7 +36,8 @@ class RegistrationViewController: UIViewController {
     private var isKeyboardShown = false
     private var textFieldType = TypeOfTextField.firstName
     
-    private var user = UserData()
+    private var user = UserRegistrationData()
+    private var registredUserData: RegistredUserData?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -81,12 +82,32 @@ class RegistrationViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        super.prepare(for: segue, sender: sender)
+        guard let emailConfirmationVC = segue.destination as? EmailConfiramtionViewController,
+              let registredUserData = self.registredUserData
+        else {
+            return
+        }
+        
+        emailConfirmationVC.registredUserData = registredUserData
+        emailConfirmationVC.userEmail = UserEmail(userEmail: self.user.email)
+    }
+    
     // вызывается, когда клавиатура появится на экране
     // сделано для того, чтобы передвигать невидимые поля в зону видимости
     @objc private func keyboardWillShow() {
         guard self.isKeyboardShown == false else {
             return
         }
+        
+        // Обработка ситуации автозаполнения логина и пароля
+        // когда это происходит, то клавиатура на очень короткий промежуток времени "отменяется"
+        // мы контролируем эту ситуацию
+        guard self.frameView.layer.position.y == self.view.center.y else {
+            return
+        }
+        
         self.isKeyboardShown = true
         
         let offset = 75
@@ -124,16 +145,16 @@ class RegistrationViewController: UIViewController {
     }
     
     private func handleRedisterRequest() {
-        DispatchQueue.global().async {
+        DispatchQueue.main.async {
             do {
                 try self.register()
             } catch {
-                
+                self.badRequest()
             }
         }
+        
     }
     
-    // TODO: Сделать обработку всех ошибок
     private func register() throws {
         guard self.user.name != "" && self.user.surname != "" &&
                 self.user.email != "" && self.user.password != "" else {
@@ -143,7 +164,7 @@ class RegistrationViewController: UIViewController {
         let endPoint = NetworkCallInformation.Registration.authSignUp
         
         guard let url = URL(string: endPoint) else {
-            throw UserDataError.invalidURL
+            throw RegistrationError.invalidURL
         }
         
         var request = URLRequest(url: url)
@@ -163,22 +184,30 @@ class RegistrationViewController: UIViewController {
             
             do {
                 guard let httpResponse = response as? HTTPURLResponse else {
-                    throw UserDataError.invalidURL
+                    throw RegistrationError.invalidURL
                 }
                 
                 if httpResponse.statusCode == 400 {
-                    throw UserDataError.badRequest
+                    throw RegistrationError.badRequest
                 } else if httpResponse.statusCode == 409 {
-                    throw UserDataError.conflict
+                    throw RegistrationError.conflict
                 } else if httpResponse.statusCode == 500 {
-                    throw UserDataError.internalServer
+                    throw RegistrationError.internalServer
                 }
-                if httpResponse.statusCode == 200 {
-                    self.performSegue(withIdentifier: SeguesNames.registrationToEmailConfirmation.rawValue, sender: self)
+                if httpResponse.statusCode == 200, let data = data {
+                    let decoder = JSONDecoder()
+                    decoder.keyDecodingStrategy = .useDefaultKeys
+                    self.registredUserData = try? decoder.decode(RegistredUserData.self, from: data)
+                    
+                    DispatchQueue.main.sync {
+                        self.performSegue(withIdentifier: SeguesNames.registrationToEmailConfirmation.rawValue, sender: self)
+                    }
+                    
                 }
             }
             catch {
-                guard let currentError = error as? UserDataError else {
+                guard let currentError = error as? RegistrationError else {
+                    print("Uncaught error")
                     return
                 }
                 switch currentError {
@@ -190,6 +219,11 @@ class RegistrationViewController: UIViewController {
                     self.internalServerError()
                 case .invalidURL:
                     self.badRequest()
+                // таких ошибок на этапе регистрации быть не может
+                case .userNotFound:
+                    break
+                case .unauthorized:
+                    break
                 }
             }
         }
@@ -234,6 +268,7 @@ extension RegistrationViewController {
         }
     }
 }
+
 
 extension RegistrationViewController: UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
@@ -443,6 +478,7 @@ extension RegistrationViewController {
         
         NSLayoutConstraint.activate(constraints)
     }
+    
     private func setEmailTextField() {
         self.frameView.addSubview(self.emailTextField)
         self.frameView.bringSubviewToFront(self.emailTextField)
@@ -464,6 +500,7 @@ extension RegistrationViewController {
         
         NSLayoutConstraint.activate(constraints)
     }
+    
     private func setPasswordTextField() {
         self.frameView.addSubview(self.passwordTextField)
         self.frameView.bringSubviewToFront(self.passwordTextField)

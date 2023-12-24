@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22155" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22155" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="PAc-eG-V9F">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22131"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -13,6 +14,9 @@
         </array>
         <array key="Comfortaa-Regular.ttf">
             <string>Comfortaa-Regular</string>
+        </array>
+        <array key="Comfortaa-SemiBold.ttf">
+            <string>Comfortaa-SemiBold</string>
         </array>
     </customFonts>
     <scenes>
@@ -150,7 +154,7 @@
                                         </state>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6LO-M6-sg7">
-                                        <rect key="frame" x="26" y="349" width="275" height="55"/>
+                                        <rect key="frame" x="26" y="409" width="275" height="55"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" red="0.13725490870000001" green="0.0078431377190000002" blue="0.34901961679999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <fontDescription key="fontDescription" name="Comfortaa-Bold" family="Comfortaa" pointSize="20"/>
@@ -188,22 +192,74 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" animating="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="1H7-i3-fl4">
-                                <rect key="frame" x="155" y="382" width="82" height="76"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="color" red="0.73725490196078436" green="0.45882352941176469" blue="0.95686274509803915" alpha="1" colorSpace="calibratedRGB"/>
-                            </activityIndicatorView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You will get mail to confirm your account" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sZQ-HD-fs4">
+                                <rect key="frame" x="37" y="126" width="319" height="63"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="63" id="MfJ-oA-XVq"/>
+                                    <constraint firstAttribute="width" constant="319" id="fXz-RM-bzv"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Comfortaa-Bold" family="Comfortaa" pointSize="28"/>
+                                <color key="textColor" red="0.16078431372549018" green="0.13725490196078433" blue="0.29411764705882354" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="If you didn't get the mail, check your spam folder. Or click the button below" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Hm-4w-8SH">
+                                <rect key="frame" x="54" y="209" width="285" height="94"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="94" id="dm8-Pj-WyC"/>
+                                    <constraint firstAttribute="width" constant="285" id="g6K-1G-VXF"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Comfortaa-SemiBold" family="Comfortaa" pointSize="20"/>
+                                <color key="textColor" red="0.16078431372549018" green="0.13725490196078433" blue="0.29411764705882354" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" highlighted="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dqt-m3-zZ6">
+                                <rect key="frame" x="130.66666666666666" y="303" width="131.99999999999997" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="132" id="6cw-p7-bTw"/>
+                                    <constraint firstAttribute="height" constant="40" id="an1-19-MUp"/>
+                                </constraints>
+                                <color key="tintColor" systemColor="linkColor"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" title="Button">
+                                    <attributedString key="attributedTitle">
+                                        <fragment content="resend e-mail">
+                                            <attributes>
+                                                <color key="NSColor" red="0.20392158630000001" green="0.47058826679999999" blue="0.96470588450000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                <font key="NSFont" size="18" name="Comfortaa-Bold"/>
+                                                <font key="NSOriginalFont" size="12" name="Helvetica"/>
+                                            </attributes>
+                                        </fragment>
+                                    </attributedString>
+                                </state>
+                                <connections>
+                                    <action selector="resendEmailButtonPressed:" destination="PAc-eG-V9F" eventType="touchUpInside" id="ouQ-FZ-kLQ"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="fNz-Of-H9V"/>
                         <color key="backgroundColor" red="0.81960784313725488" green="0.89803921568627454" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="dqt-m3-zZ6" firstAttribute="centerX" secondItem="fNz-Of-H9V" secondAttribute="centerX" id="6Ut-Qb-Xl2"/>
+                            <constraint firstItem="dqt-m3-zZ6" firstAttribute="top" secondItem="6Hm-4w-8SH" secondAttribute="bottom" id="90l-Vo-AZw"/>
+                            <constraint firstItem="6Hm-4w-8SH" firstAttribute="top" secondItem="sZQ-HD-fs4" secondAttribute="bottom" constant="20" id="OWG-8d-Gvb"/>
+                            <constraint firstItem="6Hm-4w-8SH" firstAttribute="centerX" secondItem="fNz-Of-H9V" secondAttribute="centerX" id="RDR-px-NJq"/>
+                            <constraint firstItem="sZQ-HD-fs4" firstAttribute="centerX" secondItem="fNz-Of-H9V" secondAttribute="centerX" id="oxa-Y4-Qao"/>
+                            <constraint firstItem="sZQ-HD-fs4" firstAttribute="top" secondItem="fNz-Of-H9V" secondAttribute="top" constant="126" id="szd-J7-OuH"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="resendEmailButton" destination="dqt-m3-zZ6" id="coD-2q-yUd"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6aa-Ka-iYY" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1385.4961832061067" y="-2.1126760563380285"/>
+            <point key="canvasLocation" x="1382.4427480916031" y="-2.1126760563380285"/>
         </scene>
     </scenes>
     <resources>
+        <systemColor name="linkColor">
+            <color red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

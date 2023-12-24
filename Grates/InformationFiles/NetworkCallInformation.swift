@@ -22,6 +22,9 @@ class NetworkCallInformation {
         /// переотправить письмо подтверждения
         /// * обязательно добавить userID после последнего слеша
         static let resendEmail = domain + "auth/resend/"
+        /// проверить, подтвердил ли пользователь свою почту
+        /// * обязательно добавить email, который нужно проверить, после последнего слеша
+        static let checkEmail = domain + "auth/check/"
     }
     
     class Comments {
