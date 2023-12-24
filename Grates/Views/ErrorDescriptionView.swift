@@ -40,7 +40,10 @@ class ErrorDescriptionView: UIVisualEffectView {
     
     private func setupViews() {
         self.layer.cornerRadius = 16
-        self.backgroundColor = #colorLiteral(red: 1, green: 0, blue: 0.09563680738, alpha: 0.5)
+        self.clipsToBounds = true
+        self.contentView.layer.cornerRadius = 16
+        self.contentView.backgroundColor = #colorLiteral(red: 1, green: 0, blue: 0.09563680738, alpha: 0.5)
+        self.backgroundColor = .clear
         
         self.errorLabel.textColor = .white
         self.errorLabel.numberOfLines = 1
@@ -50,6 +53,9 @@ class ErrorDescriptionView: UIVisualEffectView {
         self.errorDescriptionLabel.textColor = .white
         self.errorDescriptionLabel.numberOfLines = 0
         self.errorDescriptionLabel.font = UIFont(name: "Comfortaa Bold", size: 14)
+        
+        self.contentView.addSubview(self.errorLabel)
+        self.contentView.addSubview(self.errorDescriptionLabel)
         
         self.setErrorLabelConstraints()
         self.setErrorDescriptionLabelConstraints()

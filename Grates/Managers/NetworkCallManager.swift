@@ -58,5 +58,12 @@ class NetworkCallManager<T: Codable> {
         
     }
     
+//    func getRequest(_ request: URLRequest) {
+//        let decoder = JSONDecoder()
+//        decoder.keyDecodingStrategy = .useDefaultKeys
+//        
+//        let task = URLSession.shared.dataTask(with: <#T##URLRequest#>)
+//    }
+    
     
 }

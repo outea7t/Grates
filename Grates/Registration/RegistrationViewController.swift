@@ -27,8 +27,6 @@ class RegistrationViewController: UIViewController {
     
     // для описания появившихся ошибок
     private let errorDescriptionView = ErrorDescriptionView(effect: UIBlurEffect(style: .systemUltraThinMaterialDark), errorDescription: "Your error message here.")
-    // для анимации view с описанием ошибки
-    private var errorTopConstraint: NSLayoutConstraint?
     
     let firstNameTextField = RegisterTextField(placeholder: "first name")
     let secondNameTextField = RegisterTextField(placeholder: "second name")
@@ -100,12 +98,15 @@ class RegistrationViewController: UIViewController {
     
     // вызывается, когда клавиатура исчезает с экрана
     @objc private func keyboardWillHide() {
-        let offset = 75
+        guard self.frameView.layer.position.y == self.view.center.y - 75 else {
+            return
+        }
         
+        self.isKeyboardShown = false
+        
+        let offset = 75
         UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseInOut) {
             self.frameView.layer.position.y += CGFloat(offset)
-        } completion: { isFinished in
-            self.isKeyboardShown = false
         }
         
     }
@@ -173,13 +174,22 @@ class RegistrationViewController: UIViewController {
                     throw UserDataError.internalServer
                 }
                 if httpResponse.statusCode == 200 {
-                    print("SUCCESS")
+                    self.performSegue(withIdentifier: SeguesNames.registrationToEmailConfirmation.rawValue, sender: self)
                 }
             }
             catch {
                 guard let currentError = error as? UserDataError else {
-                    
                     return
+                }
+                switch currentError {
+                case .badRequest:
+                    self.badRequest()
+                case .conflict:
+                    self.conflict()
+                case .internalServer:
+                    self.internalServerError()
+                case .invalidURL:
+                    self.badRequest()
                 }
             }
         }
@@ -187,9 +197,42 @@ class RegistrationViewController: UIViewController {
     }
     
 }
-
+// функции с обработкой ошибок запроса
 extension RegistrationViewController {
+    private func badRequest() {
+        DispatchQueue.main.async {
+            self.errorDescriptionView.errorDescription = "Something went wrong, try again later."
+            self.animateErrorView()
+        }
+    }
     
+    private func conflict() {
+        DispatchQueue.main.async {
+            self.errorDescriptionView.errorDescription = "User with this email already exists. Try to log in instead."
+            self.animateErrorView()
+        }
+    }
+    
+    private func internalServerError() {
+        DispatchQueue.main.async {
+            self.errorDescriptionView.errorDescription = "Something went wrong, try again later."
+            self.animateErrorView()
+        }
+    }
+    
+    private func animateErrorView() {
+        UIView.animate(withDuration: 0.35,
+                       delay: 0.0,
+                       options: .curveEaseInOut) {
+            self.errorDescriptionView.layer.position.y += 150
+        }
+        
+        UIView.animate(withDuration: 0.35,
+                       delay: 5.0,
+                       options: .curveEaseInOut) {
+            self.errorDescriptionView.layer.position.y -= 150
+        }
+    }
 }
 
 extension RegistrationViewController: UITextFieldDelegate {
@@ -228,7 +271,6 @@ extension RegistrationViewController: UITextFieldDelegate {
     
     // TODO: Добавить валидацию
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        
         switch textField {
         case emailTextField:
             break
@@ -244,10 +286,6 @@ extension RegistrationViewController: UITextFieldDelegate {
     
     // TODO: Сделать возможность показать кнопку "сделать пароль видимым"
     func textFieldDidEndEditing(_ textField: UITextField) {
-//        guard textField == self.passwordTextField else {
-//            return
-//        }
-        
         if textField == self.firstNameTextField {
             self.user.name = textField.text ?? ""
             print(textField.text)
@@ -264,7 +302,6 @@ extension RegistrationViewController: UITextFieldDelegate {
             self.user.password = textField.text ?? ""
             print(textField.text)
         }
-        
     }
 }
 
@@ -293,6 +330,7 @@ extension RegistrationViewController {
         
         NSLayoutConstraint.activate(signUpButtonConstraints)
     }
+    
     private func setSignInButton() {
         self.signInButton.translatesAutoresizingMaskIntoConstraints = false
         
@@ -360,7 +398,6 @@ extension RegistrationViewController {
             self.signUpBigButton.centerXAnchor.constraint(equalTo: self.frameView.centerXAnchor),
             self.signUpBigButton.bottomAnchor.constraint(equalTo: self.frameView.bottomAnchor, constant: -13)
         ]
-        
         NSLayoutConstraint.activate(constraints)
     }
     
@@ -450,16 +487,12 @@ extension RegistrationViewController {
     }
     
     private func setErrorDescriptionView() {
-        self.errorDescriptionView.translatesAutoresizingMaskIntoConstraints = false
+        self.view.addSubview(self.errorDescriptionView)
+        self.view.bringSubviewToFront(self.errorDescriptionView)
         
-        let topConstraint = self.errorDescriptionView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 45)
-        let constraints: [NSLayoutConstraint] = [
-            self.errorDescriptionView.widthAnchor.constraint(equalToConstant: 370),
-            self.errorDescriptionView.heightAnchor.constraint(equalToConstant: 90),
-            self.errorDescriptionView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
-            topConstraint
-        ]
-        NSLayoutConstraint.activate(constraints)
+        self.errorDescriptionView.frame.size = CGSize(width: 370, height: 90)
+        self.errorDescriptionView.center.x = self.view.center.x
+        self.errorDescriptionView.center.y = self.view.center.y - self.view.frame.height/2.0 - 45
     }
 }
 

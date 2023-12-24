@@ -11,5 +11,7 @@ import UIKit
 /// имена всех переходов, которые существуют в приложении
 enum SeguesNames: String {
     case loginToRegistration = "loginToRegistration"
-    case loginToNewsFeed
+    case loginToNewsFeed = "loginToNewsFeed"
+    case registrationToEmailConfirmation = "registrationToEmailConfirmation"
+    case confirmationToNewsFeed = "confirmationToNewsFeed"
 }
