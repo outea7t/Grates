@@ -14,4 +14,5 @@ enum SeguesNames: String {
     case loginToNewsFeed = "loginToNewsFeed"
     case registrationToEmailConfirmation = "registrationToEmailConfirmation"
     case confirmationToNewsFeed = "confirmationToNewsFeed"
+    case loginToEmailConfirmation = "loginToEmailConfirmation"
 }

@@ -52,16 +52,16 @@ class SuccessDescriptionView: UIVisualEffectView {
     }
     
     private func setDescriptionLabelConstraints() {
-//        self.descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
-//        
-//        let constraints: [NSLayoutConstraint] = [
-//            self.descriptionLabel.widthAnchor.constraint(equalToConstant: 336),
-//            self.descriptionLabel.heightAnchor.constraint(equalToConstant: 75),
-//            self.descriptionLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor),
-//            self.descriptionLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 7)
-//        ]
-//        
-//        NSLayoutConstraint.activate(constraints)
+        self.descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
+        
+        let constraints: [NSLayoutConstraint] = [
+            self.descriptionLabel.widthAnchor.constraint(equalToConstant: 336),
+            self.descriptionLabel.heightAnchor.constraint(equalToConstant: 75),
+            self.descriptionLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+            self.descriptionLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 7)
+        ]
+        
+        NSLayoutConstraint.activate(constraints)
     }
     
 }

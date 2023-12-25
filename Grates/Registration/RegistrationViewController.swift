@@ -173,16 +173,18 @@ class RegistrationViewController: UIViewController {
         
         let encoder = JSONEncoder()
         encoder.keyEncodingStrategy = .useDefaultKeys
-        let jsonData = try encoder.encode(self.user)
-        request.httpBody = jsonData
+        let jsonData = try? encoder.encode(self.user)
+        if let jsonData = jsonData {
+            request.httpBody = jsonData
+        }
         
         let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
-            if let error = error {
-                print("Error in request: \(error)")
-                return
-            }
             
             do {
+                if let error = error {
+                    print("Error in request: \(error)")
+                    throw RegistrationError.badRequest
+                }
                 guard let httpResponse = response as? HTTPURLResponse else {
                     throw RegistrationError.invalidURL
                 }
@@ -268,7 +270,6 @@ extension RegistrationViewController {
         }
     }
 }
-
 
 extension RegistrationViewController: UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {

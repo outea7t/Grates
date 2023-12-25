@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22155" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="PAc-eG-V9F">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22155" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -23,7 +23,7 @@
         <!--Log In View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="LogInViewController" customModule="Grates" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LogInViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="BYZ-38-t0r" customClass="LogInViewController" customModule="Grates" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -107,6 +107,7 @@
                         <outlet property="signInButton" destination="Cf1-GT-CRL" id="TK0-ak-jJE"/>
                         <outlet property="signUpButton" destination="4XY-eQ-qKI" id="LsT-Wf-JXe"/>
                         <segue destination="usf-R1-xZr" kind="presentation" identifier="loginToRegistration" modalPresentationStyle="overFullScreen" modalTransitionStyle="crossDissolve" id="Em2-hc-lDU"/>
+                        <segue destination="PAc-eG-V9F" kind="presentation" identifier="loginToEmailConfirmation" modalPresentationStyle="fullScreen" id="pxg-fj-8h0"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -249,13 +250,34 @@
                     </view>
                     <connections>
                         <outlet property="resendEmailButton" destination="dqt-m3-zZ6" id="coD-2q-yUd"/>
+                        <segue destination="Mvb-Ig-dkb" kind="unwind" identifier="unwindToLogIn" unwindAction="unwindToLogIn:" id="P11-2i-B9Y"/>
+                        <segue destination="8qj-NP-pO7" kind="presentation" identifier="confirmationToNewsFeed" modalPresentationStyle="fullScreen" id="AqW-cr-gkU"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6aa-Ka-iYY" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <exit id="Mvb-Ig-dkb" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="1382.4427480916031" y="-2.1126760563380285"/>
         </scene>
+        <!--News Feed View Controller-->
+        <scene sceneID="yIW-kx-Dun">
+            <objects>
+                <viewController id="8qj-NP-pO7" customClass="NewsFeedViewController" customModule="Grates" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="uoV-Lf-X9K">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="xFm-tq-jGN"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="DRB-SJ-Ajw" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2303" y="-2"/>
+        </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="Xed-EW-04s"/>
+    </inferredMetricsTieBreakers>
     <resources>
         <systemColor name="linkColor">
             <color red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

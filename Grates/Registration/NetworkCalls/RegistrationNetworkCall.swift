@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-// Для POST запроса на регистрацию
+/// Для POST запроса на регистрацию
 struct UserRegistrationData: Codable {
     var email: String = ""
     var name: String = ""
@@ -16,32 +16,32 @@ struct UserRegistrationData: Codable {
     var surname: String = ""
 }
 
-// Если регистрация удалась, то приходит userID
+/// Если регистрация удалась, то приходит userID
 struct RegistredUserData: Codable {
     var id: Int
 }
 
-// Для POST запроса на вход в соц-сеть
+/// Для POST запроса на вход в соц-сеть
 struct UserLoginData: Codable {
-    var email: String
-    var password: String
+    var email: String = ""
+    var password: String = ""
 }
 
-// Для POST запроса переотправления письма подтверждения аккаунта
+/// Для POST запроса переотправления письма подтверждения аккаунта
 struct ResendEmailData: Codable {
     var userId: Int
 }
 
+/// для запроса проверки, подтвердил ли пользователь почту
 struct UserEmail: Codable {
     var userEmail: String
 }
 
-// Get
-// Post
-// Put
-// Update
-// Delete
-// Patch
+struct EmailConfirmationData: Codable {
+    var is_confirmed: Bool
+}
+
+/// Ошибки, которые могут возникнуть в запросах, отправляемых во время регистрации
 enum RegistrationError: Int, Error {
     case invalidURL = 1
     /// неправильно составленный запрос

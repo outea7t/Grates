@@ -8,6 +8,7 @@
 import UIKit
 import RiveRuntime
 
+// TODO: Спросить у Ярика по поводу запроса на подтверждение почты
 class EmailConfiramtionViewController: UIViewController {
     
     private let loadingView = RiveView()
@@ -21,6 +22,7 @@ class EmailConfiramtionViewController: UIViewController {
     // содержит id пользователя (для переотправления письма пользователю)
     var registredUserData: RegistredUserData?
     var userEmail: UserEmail?
+    var emailConfirmationData: EmailConfirmationData?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,7 +32,6 @@ class EmailConfiramtionViewController: UIViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        self.animateDescriptionView(errorDescriptionView)
         DispatchQueue.global().async {
             do {
                 try self.confirmRequest()
@@ -68,35 +69,52 @@ class EmailConfiramtionViewController: UIViewController {
     }
     
     private func confirmRequest() throws {
+        print("Entered - 1")
         guard let userEmail = self.userEmail else {
             return
         }
+        print("Entered - 2")
         let endPoint = NetworkCallInformation.Registration.checkEmail + "\(userEmail.userEmail)"
         
         guard let url = URL(string: endPoint) else {
             throw RegistrationError.invalidURL
         }
-        
+        print("Entered - 3")
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
         
         let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
             do {
+                print("Entered - 4")
+                
                 if let error = error {
                     print("Error in request: \(error)")
                     throw RegistrationError.invalidURL
                 }
                 
+                print("Entered - 5")
                 guard let httpResponse = response as? HTTPURLResponse else {
                     throw RegistrationError.invalidURL
                 }
                 
+                print("Entered - 6, \(httpResponse.statusCode)")
                 if httpResponse.statusCode == 400 {
                     throw RegistrationError.badRequest
                 }
                 
-                if httpResponse.statusCode == 400 {
-                    self.succeedConfirmation()
+                print("Entered - 7")
+                if httpResponse.statusCode == 200, let data = data {
+                    let decoder = JSONDecoder()
+                    decoder.keyDecodingStrategy = .useDefaultKeys
+                    self.emailConfirmationData = try? decoder.decode(EmailConfirmationData.self, from: data)
+                    
+                    if let emailConfirmationData = self.emailConfirmationData {
+                        if emailConfirmationData.is_confirmed {
+                            self.moveToNewsFeed()
+                        } else {
+                            self.succeedConfirmation()
+                        }
+                    }
                 }
                 
             } catch {
@@ -120,17 +138,21 @@ class EmailConfiramtionViewController: UIViewController {
                 }
             }
         }
+        
+        task.resume()
     }
     
     private func resendEmail() throws {
+        print("Entered - 1")
         guard let registredUserData = self.registredUserData else {
             return
         }
+        print("Entered - 2")
         let endPoint = NetworkCallInformation.Registration.resendEmail + "\(registredUserData.id)"
         guard let url = URL(string: endPoint) else {
             throw RegistrationError.invalidURL
         }
-        
+        print("Entered - 3")
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -139,17 +161,18 @@ class EmailConfiramtionViewController: UIViewController {
         encoder.keyEncodingStrategy = .useDefaultKeys
         let jsonData = try encoder.encode(registredUserData)
         request.httpBody = jsonData
-        
+        print("Entered - 4")
         let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
             do {
                 if let error = error {
                     print("Error in request: \(error)")
                     throw RegistrationError.invalidURL
                 }
+                print("Entered - 5")
                 guard let httpResponse = response as? HTTPURLResponse else {
                     throw RegistrationError.invalidURL
                 }
-                
+                print("Entered - 6, \(httpResponse.statusCode)")
                 if httpResponse.statusCode == 400 {
                     throw RegistrationError.badRequest
                 } else if httpResponse.statusCode == 404 {
@@ -157,7 +180,7 @@ class EmailConfiramtionViewController: UIViewController {
                 } else if httpResponse.statusCode == 500 {
                     throw RegistrationError.internalServer
                 }
-                
+                print("Entered - 7")
             }
             catch {
                 guard let currentError = error as? RegistrationError else {
@@ -192,6 +215,15 @@ extension EmailConfiramtionViewController {
         }
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        super.prepare(for: segue, sender: sender)
+        if let logInViewController = segue.destination as? LogInViewController {
+            print("Sent data back")
+            logInViewController.registredUserData = self.registredUserData
+            logInViewController.userEmail = self.userEmail
+        }
+    }
+    
     private func badRequest() {
         DispatchQueue.main.async {
             self.errorDescriptionView.errorDescription = "Something went wrong, try again later."
@@ -207,11 +239,21 @@ extension EmailConfiramtionViewController {
     }
     
     private func succeedConfirmation() {
-        DispatchQueue.main.async {
-            self.successDescriptionView.successDescription = "You have successfully confirmed your account!"
-            self.animateDescriptionView(self.successDescriptionView)
+        DispatchQueue.main.sync {
+            print("Entered succeed-1")
+            if let viewController = self.storyboard?.instantiateViewController(withIdentifier: "LogInViewController") as? LogInViewController {
+                print("Entered succeed-2")
+                self.performSegue(withIdentifier: "unwindToLogIn", sender: self)
+            }
         }
     }
+    
+    private func moveToNewsFeed() {
+        DispatchQueue.main.sync {
+            self.performSegue(withIdentifier: SeguesNames.confirmationToNewsFeed.rawValue, sender: self)
+        }
+    }
+    
     private func animateDescriptionView(_ descriptionView: UIVisualEffectView) {
         UIView.animate(withDuration: 0.35,
                        delay: 0.0,

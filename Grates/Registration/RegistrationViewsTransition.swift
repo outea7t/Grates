@@ -56,7 +56,7 @@ extension RegistrationViewsTransition: UIViewControllerAnimatedTransitioning {
         let toLogInButtonFrame = logInViewController.logInButton.frame.offsetBy(dx: 0, dy: -100)
         
         logInViewController.frameView.frame.size = registrationViewController.frameView.frame.size
-        logInViewController.frameView.frame.origin = registrationViewController.frameView.frame.origin
+        logInViewController.frameView.center = registrationViewController.frameView.center
         logInViewController.logInButton.frame = logInViewController.logInButton.frame.offsetBy(dx: 0, dy: 100)
         
         logInViewController.emailTextField.alpha = 0

@@ -34,6 +34,14 @@ class RegisterTextField: UITextField {
         bounds.inset(by: padding)
     }
     
+    func wrongInput() {
+        self.textColor = #colorLiteral(red: 1, green: 0.09411764706, blue: 0.09411764706, alpha: 0.4)
+    }
+    
+    func normalInput() {
+        self.textColor = #colorLiteral(red: 0.02352941176, green: 0.02352941176, blue: 0.02352941176, alpha: 0.4)
+    }
+    
     private func setupTextField(placeholder: String) {
         self.textColor = #colorLiteral(red: 0.02352941176, green: 0.02352941176, blue: 0.02352941176, alpha: 0.4)
         
@@ -56,8 +64,6 @@ class RegisterTextField: UITextField {
         
         self.rightView = clearButton
         self.rightViewMode = .whileEditing
-        
-        
     }
     
     override func rightViewRect(forBounds bounds: CGRect) -> CGRect {

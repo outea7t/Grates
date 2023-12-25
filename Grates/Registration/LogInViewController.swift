@@ -22,15 +22,24 @@ class LogInViewController: UIViewController {
     @IBOutlet weak var forgotPasswordButton: UIButton!
     
     // для описания появившихся ошибок
-   
+    private let errorDescriptionView = ErrorDescriptionView(effect: UIBlurEffect(style: .systemUltraThinMaterialDark), errorDescription: "Your error message here.")
     
     let emailTextField = RegisterTextField(placeholder: "example@email.com")
     let passwordTextField = RegisterTextField(placeholder: "password")
+    private var hasEmailPassedValidation = false
+    private var hasPasswordPassedValidation = true
     
-    var blurView: UIVisualEffectView?
+    private var blurView: UIVisualEffectView?
     let gradientView = UIView()
-    
     private var isKeyboardShown = false
+    
+    var userLoginData = UserLoginData()
+    /// access и refresh токены, которые генерируется после входа
+    var tokens: Tokens?
+    // содержит id пользователя (для переотправления письма пользователю)
+    var registredUserData: RegistredUserData?
+    var userEmail: UserEmail?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -60,6 +69,8 @@ class LogInViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
+    
+    
     // вызывается, когда клавиатура появится на экране
     // сделано для того, чтобы передвигать невидимые поля в зону видимости
     @objc private func keyboardWillShow() {
@@ -79,7 +90,6 @@ class LogInViewController: UIViewController {
         } completion: { isFinished in
             self.isKeyboardShown = false
         }
-        
     }
     
     @objc private func dismissKeyboard() {
@@ -93,7 +103,159 @@ class LogInViewController: UIViewController {
         
     }
     @IBAction func LogInButtonTapped(_ sender: UIButton) {
+        self.handleLoginRequest()
+    }
+    
+    func handleLoginRequest() {
+        DispatchQueue.main.async {
+            do {
+                try self.login()
+            } catch {
+                self.badRequest()
+            }
+        }
+    }
+    
+    func login() throws {
+        guard self.userLoginData.email != "" && self.userLoginData.password != "" else {
+            
+        }
         
+        let endPoint = NetworkCallInformation.Registration.authSignIn
+        
+        guard let url = URL(string: endPoint) else {
+            throw RegistrationError.invalidURL
+        }
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        let encoder = JSONEncoder()
+        encoder.keyEncodingStrategy = .useDefaultKeys
+        let jsonData = try? encoder.encode(self.userLoginData)
+        if let jsonData = jsonData {
+            request.httpBody = jsonData
+        }
+        
+        let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
+            do {
+                
+                if let error = error {
+                    print("Error in request: \(error)")
+                    throw RegistrationError.badRequest
+                }
+                
+                guard let httpResponse = response as? HTTPURLResponse else {
+                    throw RegistrationError.invalidURL
+                }
+                
+                if httpResponse.statusCode == 400 {
+                    throw RegistrationError.badRequest
+                } else if httpResponse.statusCode == 401 {
+                    throw RegistrationError.unauthorized
+                }
+                if httpResponse.statusCode == 200, let data = data {
+                    let decoder = JSONDecoder()
+                    decoder.keyDecodingStrategy = .useDefaultKeys
+                    self.tokens = try? decoder.decode(Tokens.self, from: data)
+                    
+                    DispatchQueue.main.sync {
+                        self.performSegue(withIdentifier: SeguesNames.loginToEmailConfirmation.rawValue, sender: self)
+                    }
+                }
+            } catch {
+                guard let currentError = error as? RegistrationError else {
+                    print("Uncaught error")
+                    return
+                }
+                switch currentError {
+                case .badRequest:
+                    self.badRequest()
+                case .unauthorized:
+                    self.unauthorized()
+                case .invalidURL:
+                    self.badRequest()
+                case .userNotFound:
+                    break
+                case .conflict:
+                    break
+                case .internalServer:
+                    break
+                }
+            }
+        }
+        
+        task.resume()
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        super.prepare(for: segue, sender: sender)
+        
+        if let emailConfirmationVC = segue.destination as? EmailConfiramtionViewController {
+            print("sent to confirm")
+            emailConfirmationVC.registredUserData = self.registredUserData
+            emailConfirmationVC.userEmail = self.userEmail
+        }
+        
+    }
+    
+    @IBAction func unwindToLogIn(_ sender: UIStoryboardSegue) {
+        
+    }
+}
+// обрабатываем ошибки с запросов
+extension LogInViewController {
+    private func allFieldsArentFilled() {
+        DispatchQueue.main.async {
+            self.errorDescriptionView.errorDescription = "All fields should be filled."
+            self.animateErrorView()
+            
+            if self.emailTextField.text == "" {
+                self.emailTextField.wrongInput()
+            }
+            if self.passwordTextField.text == "" {
+                self.passwordTextField.wrongInput()
+            }
+        }
+    }
+    
+    private func badRequest() {
+        DispatchQueue.main.async {
+            self.errorDescriptionView.errorDescription = "Something went wrong, try again later."
+            self.animateErrorView()
+        }
+    }
+    
+    private func unauthorized() {
+        DispatchQueue.main.async {
+            self.errorDescriptionView.errorDescription = "User with this e-mail doesn't exist, try to sign up instead"
+            self.animateErrorView()
+        }
+    }
+    
+    private func internalServerError() {
+        DispatchQueue.main.async {
+            self.errorDescriptionView.errorDescription = "Something went wrong, try again later."
+            self.animateErrorView()
+        }
+    }
+    
+    private func animateErrorView() {
+        guard self.errorDescriptionView.center.y != self.view.center.y - self.view.frame.height/2.0 + 105 else {
+            return
+        }
+        UIView.animate(withDuration: 0.35,
+                       delay: 0.0,
+                       options: .curveEaseInOut) {
+            self.errorDescriptionView.layer.position.y += 150
+        }
+        
+        UIView.animate(withDuration: 0.35,
+                       delay: 5.0,
+                       options: .curveEaseInOut) {
+            self.errorDescriptionView.layer.position.y -= 150
+        }
     }
 }
 
@@ -111,7 +273,6 @@ extension LogInViewController: UITextFieldDelegate {
     
     // TODO: Добавить валидацию
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        
         switch textField {
         case emailTextField:
             break
@@ -127,8 +288,11 @@ extension LogInViewController: UITextFieldDelegate {
     
     // TODO: Сделать возможность показать кнопку "сделать пароль видимым"
     func textFieldDidEndEditing(_ textField: UITextField) {
-        guard textField == self.passwordTextField else {
-            return
+        if textField == self.emailTextField {
+            self.userLoginData.email = textField.text ?? ""
+        }
+        else if textField == self.passwordTextField {
+            self.userLoginData.password = textField.text ?? ""
         }
         
     }
@@ -356,5 +520,14 @@ extension LogInViewController {
         )
         
         NSLayoutConstraint.activate(forgotPasswordConstraints)
+    }
+    
+    private func setErrorDescriptionView() {
+        self.view.addSubview(self.errorDescriptionView)
+        self.view.bringSubviewToFront(self.errorDescriptionView)
+        
+        self.errorDescriptionView.frame.size = CGSize(width: 370, height: 90)
+        self.errorDescriptionView.center.x = self.view.center.x
+        self.errorDescriptionView.center.y = self.view.center.y - self.view.frame.height/2.0 - 45
     }
 }
