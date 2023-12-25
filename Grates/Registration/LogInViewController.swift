@@ -23,6 +23,7 @@ class LogInViewController: UIViewController {
     
     // для описания появившихся ошибок
     private let errorDescriptionView = ErrorDescriptionView(effect: UIBlurEffect(style: .systemUltraThinMaterialDark), errorDescription: "Your error message here.")
+    private var isErrorDescriptionViewAnimated = false
     
     let emailTextField = RegisterTextField(placeholder: "example@email.com")
     let passwordTextField = RegisterTextField(placeholder: "password")
@@ -54,11 +55,14 @@ class LogInViewController: UIViewController {
         self.setSignInButton()
         self.setSignUpButton()
         self.setForgotPasswordButton()
+        
         self.view.bringSubviewToFront(self.logoLabel)
+        self.setErrorDescriptionView()
         
         self.frameView.clipsToBounds = true
         self.emailTextField.delegate = self
         self.passwordTextField.delegate = self
+        
         
         // отмена набора текста, когда пользователь нажимает на экран вне клавиатуры
         let keyboardDismissGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
@@ -118,7 +122,18 @@ class LogInViewController: UIViewController {
     
     func login() throws {
         guard self.userLoginData.email != "" && self.userLoginData.password != "" else {
-            
+            self.allFieldsArentFilled()
+            return
+        }
+        
+        guard self.validateEmail() else {
+            self.incorrectEmail()
+            return
+        }
+        
+        guard self.validatePassword() else {
+            self.incorrectPassword()
+            return
         }
         
         let endPoint = NetworkCallInformation.Registration.authSignIn
@@ -191,13 +206,11 @@ class LogInViewController: UIViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         super.prepare(for: segue, sender: sender)
-        
         if let emailConfirmationVC = segue.destination as? EmailConfiramtionViewController {
             print("sent to confirm")
             emailConfirmationVC.registredUserData = self.registredUserData
             emailConfirmationVC.userEmail = self.userEmail
         }
-        
     }
     
     @IBAction func unwindToLogIn(_ sender: UIStoryboardSegue) {
@@ -217,6 +230,23 @@ extension LogInViewController {
             if self.passwordTextField.text == "" {
                 self.passwordTextField.wrongInput()
             }
+        }
+    }
+    
+    private func incorrectEmail() {
+        DispatchQueue.main.async {
+            self.errorDescriptionView.errorDescription = "Incorrect e-mail."
+            self.animateErrorView()
+            
+            self.emailTextField.wrongInput()
+        }
+    }
+    
+    private func incorrectPassword() {
+        DispatchQueue.main.async {
+            self.errorDescriptionView.errorDescription = "Password length should be at least 8 charachters."
+            self.animateErrorView()
+            self.passwordTextField.wrongInput()
         }
     }
     
@@ -242,9 +272,12 @@ extension LogInViewController {
     }
     
     private func animateErrorView() {
-        guard self.errorDescriptionView.center.y != self.view.center.y - self.view.frame.height/2.0 + 105 else {
+        
+        guard !self.isErrorDescriptionViewAnimated else {
             return
         }
+        self.isErrorDescriptionViewAnimated = true
+        
         UIView.animate(withDuration: 0.35,
                        delay: 0.0,
                        options: .curveEaseInOut) {
@@ -255,6 +288,8 @@ extension LogInViewController {
                        delay: 5.0,
                        options: .curveEaseInOut) {
             self.errorDescriptionView.layer.position.y -= 150
+        } completion: { _ in
+            self.isErrorDescriptionViewAnimated = false
         }
     }
 }
@@ -278,7 +313,6 @@ extension LogInViewController: UITextFieldDelegate {
             break
         case passwordTextField:
             break
-            
         default:
             break
         }
@@ -295,6 +329,30 @@ extension LogInViewController: UITextFieldDelegate {
             self.userLoginData.password = textField.text ?? ""
         }
         
+        if self.validateEmail() {
+            self.emailTextField.normalInput()
+        }
+        if self.validatePassword() {
+            self.passwordTextField.normalInput()
+        }
+        
+    }
+    
+    private func validateEmail() -> Bool {
+        let emailRegex = "^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4}$"
+        let emailPredicate = NSPredicate(format: "SELF MATCHES %@", emailRegex)
+        return emailPredicate.evaluate(with: self.emailTextField.text)
+    }
+    
+    private func validatePassword() -> Bool {
+        guard let text = self.passwordTextField.text else {
+            return false
+        }
+        
+        if text.count >= 8 {
+            return true
+        }
+        return false
     }
 }
 

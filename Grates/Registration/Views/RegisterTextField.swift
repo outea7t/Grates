@@ -14,6 +14,7 @@ class RegisterTextField: UITextField {
     
     init(placeholder: String) {
         super.init(frame: .zero)
+        self.placeholder = placeholder
         self.setupTextField(placeholder: placeholder)
     }
     
@@ -36,11 +37,20 @@ class RegisterTextField: UITextField {
     
     func wrongInput() {
         self.textColor = #colorLiteral(red: 1, green: 0.09411764706, blue: 0.09411764706, alpha: 0.4)
+        guard let placeholder = self.placeholder else {
+            return
+        }
+        self.attributedPlaceholder = NSAttributedString(string: placeholder, attributes: [NSAttributedString.Key.foregroundColor: #colorLiteral(red: 1, green: 0.09411764706, blue: 0.09411764706, alpha: 0.4)])
     }
     
     func normalInput() {
         self.textColor = #colorLiteral(red: 0.02352941176, green: 0.02352941176, blue: 0.02352941176, alpha: 0.4)
+        guard let placeholder = self.placeholder else {
+            return
+        }
+        self.attributedPlaceholder = NSAttributedString(string: placeholder, attributes: [NSAttributedString.Key.foregroundColor: #colorLiteral(red: 0.02352941176, green: 0.02352941176, blue: 0.02352941176, alpha: 0.4)])
     }
+    
     
     private func setupTextField(placeholder: String) {
         self.textColor = #colorLiteral(red: 0.02352941176, green: 0.02352941176, blue: 0.02352941176, alpha: 0.4)

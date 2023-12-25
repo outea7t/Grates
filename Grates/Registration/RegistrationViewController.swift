@@ -27,6 +27,7 @@ class RegistrationViewController: UIViewController {
     
     // для описания появившихся ошибок
     private let errorDescriptionView = ErrorDescriptionView(effect: UIBlurEffect(style: .systemUltraThinMaterialDark), errorDescription: "Your error message here.")
+    private var isErrorDescriptionViewAnimated = false
     
     let firstNameTextField = RegisterTextField(placeholder: "first name")
     let secondNameTextField = RegisterTextField(placeholder: "second name")
@@ -129,7 +130,6 @@ class RegistrationViewController: UIViewController {
         UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseInOut) {
             self.frameView.layer.position.y += CGFloat(offset)
         }
-        
     }
     
     @objc private func dismissKeyboard() {
@@ -158,7 +158,24 @@ class RegistrationViewController: UIViewController {
     private func register() throws {
         guard self.user.name != "" && self.user.surname != "" &&
                 self.user.email != "" && self.user.password != "" else {
-            
+            self.allFieldsArentFilled()
+            return
+        }
+        guard self.validateName(self.firstNameTextField.text) else {
+            self.incorrectFirstName()
+            return
+        }
+        guard self.validateName(self.secondNameTextField.text) else {
+            self.incorrectLastName()
+            return
+        }
+        guard self.validateEmail() else {
+            self.incorrectEmail()
+            return
+        }
+        
+        guard self.validatePassword() else {
+            self.incorrectPassword()
             return
         }
         let endPoint = NetworkCallInformation.Registration.authSignUp
@@ -235,6 +252,55 @@ class RegistrationViewController: UIViewController {
 }
 // функции с обработкой ошибок запроса
 extension RegistrationViewController {
+    private func allFieldsArentFilled() {
+        DispatchQueue.main.async {
+            self.errorDescriptionView.errorDescription = "All fields should be filled."
+            self.animateErrorView()
+            
+            if self.emailTextField.text == "" {
+                self.emailTextField.wrongInput()
+            }
+            if self.passwordTextField.text == "" {
+                self.passwordTextField.wrongInput()
+            }
+        }
+    }
+    
+    private func incorrectFirstName() {
+        DispatchQueue.main.async {
+            self.errorDescriptionView.errorDescription = "First name should be one word, containing letters from Latin alphabet."
+            self.animateErrorView()
+            
+            self.firstNameTextField.wrongInput()
+        }
+    }
+    
+    private func incorrectLastName() {
+        DispatchQueue.main.async {
+            self.errorDescriptionView.errorDescription = "Second name should be one word, containing letters from Latin alphabet."
+            self.animateErrorView()
+            
+            self.secondNameTextField.wrongInput()
+        }
+    }
+    
+    private func incorrectEmail() {
+        DispatchQueue.main.async {
+            self.errorDescriptionView.errorDescription = "Incorrect e-mail."
+            self.animateErrorView()
+            
+            self.emailTextField.wrongInput()
+        }
+    }
+    
+    private func incorrectPassword() {
+        DispatchQueue.main.async {
+            self.errorDescriptionView.errorDescription = "Password length should be at least 8 charachters."
+            self.animateErrorView()
+            self.passwordTextField.wrongInput()
+        }
+    }
+    
     private func badRequest() {
         DispatchQueue.main.async {
             self.errorDescriptionView.errorDescription = "Something went wrong, try again later."
@@ -257,6 +323,11 @@ extension RegistrationViewController {
     }
     
     private func animateErrorView() {
+        guard !self.isErrorDescriptionViewAnimated else {
+            return
+        }
+        self.isErrorDescriptionViewAnimated = true
+        
         UIView.animate(withDuration: 0.35,
                        delay: 0.0,
                        options: .curveEaseInOut) {
@@ -267,6 +338,8 @@ extension RegistrationViewController {
                        delay: 5.0,
                        options: .curveEaseInOut) {
             self.errorDescriptionView.layer.position.y -= 150
+        } completion: { _ in
+            self.isErrorDescriptionViewAnimated = false
         }
     }
 }
@@ -338,6 +411,43 @@ extension RegistrationViewController: UITextFieldDelegate {
             self.user.password = textField.text ?? ""
             print(textField.text)
         }
+        
+        if self.validateName(self.firstNameTextField.text) {
+            self.firstNameTextField.normalInput()
+        }
+        if self.validateName(self.secondNameTextField.text) {
+            self.secondNameTextField.normalInput()
+        }
+        if self.validateEmail() {
+            self.emailTextField.normalInput()
+        }
+        if self.validatePassword() {
+            self.passwordTextField.normalInput()
+        }
+        
+    }
+    
+    private func validateName(_ text: String?) -> Bool {
+        let nameRegex = "^[A-za-z]+$"
+        let namePredicate = NSPredicate(format: "SELF MATCHES %@", nameRegex)
+        return namePredicate.evaluate(with: text)
+    }
+    
+    private func validateEmail() -> Bool {
+        let emailRegex = "^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4}$"
+        let emailPredicate = NSPredicate(format: "SELF MATCHES %@", emailRegex)
+        return emailPredicate.evaluate(with: self.emailTextField.text)
+    }
+    
+    private func validatePassword() -> Bool {
+        guard let text = self.passwordTextField.text else {
+            return false
+        }
+        
+        if text.count >= 8 {
+            return true
+        }
+        return false
     }
 }
 
