@@ -28,6 +28,8 @@ class PostViewCell: UICollectionViewCell {
     var data: PostData?
     var viewSize = CGSize()
     
+    var shapes = [OvalView]()
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         
@@ -36,6 +38,9 @@ class PostViewCell: UICollectionViewCell {
     func setup(data: PostData, viewSize: CGSize) {
         self.data = data
         self.viewSize = viewSize
+        
+        self.backgroundColor = #colorLiteral(red: 0.7882352941, green: 0.8745098039, blue: 1, alpha: 1)
+        self.layer.cornerRadius = 20
         
         self.blurView.contentView.backgroundColor = .clear
         self.blurView.backgroundColor = .clear
@@ -60,9 +65,20 @@ class PostViewCell: UICollectionViewCell {
         
         self.viewsCountLabel.text = self.calculateViewsForString(viewsCount: data.viewsNumber)
         
-        self.mainTextLabel.numberOfLines = 35
-//        self.mainTextLabel.lineBreakMode = .
+        self.mainTextLabel.numberOfLines = 20
+        self.mainTextLabel.lineBreakMode = .byWordWrapping
+        self.mainTextLabel.text = data.text
         
+        guard let likeButton = self.likeButton,
+              let commentButton = self.commentButton,
+              let repostButton = self.repostButton
+        else {
+            return
+        }
+                
+        self.addSubview(likeButton)
+        self.addSubview(commentButton)
+        self.addSubview(repostButton)
         // устанавли
         self.setConstraints()
         self.setBackgroundShapes()
@@ -127,10 +143,13 @@ class PostViewCell: UICollectionViewCell {
         self.mainTextLabel.translatesAutoresizingMaskIntoConstraints = false
         let mainTextConstraints: [NSLayoutConstraint] = [
             self.mainTextLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 10),
-            self.mainTextLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: 38),
-            self.mainTextLabel.topAnchor.constraint(equalTo: self.avatarImageView.bottomAnchor, constant: 1)
+            self.mainTextLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -38),
+            self.mainTextLabel.topAnchor.constraint(equalTo: self.avatarImageView.bottomAnchor, constant: 16)
         ]
+        self.mainTextLabel.backgroundColor = .red
+        
         NSLayoutConstraint.activate(mainTextConstraints)
+        
         
         let calculatedWidth: CGFloat = 23 + self.avatarImageView.frame.height + 1 + self.mainTextLabel.frame.height + 50
         // MARK: Потом констрейнты для рамки
@@ -156,7 +175,7 @@ class PostViewCell: UICollectionViewCell {
                 likeButton.widthAnchor.constraint(equalToConstant: 67),
                 likeButton.heightAnchor.constraint(equalToConstant: 35),
                 likeButton.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 5),
-                likeButton.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: 19)
+                likeButton.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -19)
             ]
             NSLayoutConstraint.activate(likeButtonConstraints)
             
@@ -165,7 +184,7 @@ class PostViewCell: UICollectionViewCell {
                 commentButton.widthAnchor.constraint(equalToConstant: 67),
                 commentButton.heightAnchor.constraint(equalToConstant: 35),
                 commentButton.leadingAnchor.constraint(equalTo: likeButton.trailingAnchor, constant: 14.5),
-                commentButton.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: 19)
+                commentButton.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -19)
             ]
             NSLayoutConstraint.activate(commentButtonConstraints)
             
@@ -174,7 +193,7 @@ class PostViewCell: UICollectionViewCell {
                 repostButton.widthAnchor.constraint(equalToConstant: 67),
                 repostButton.heightAnchor.constraint(equalToConstant: 35),
                 repostButton.leadingAnchor.constraint(equalTo: commentButton.trailingAnchor, constant: 14.5),
-                repostButton.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: 19)
+                repostButton.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -19)
             ]
             NSLayoutConstraint.activate(repostButtonConstraints)
         }
@@ -183,7 +202,7 @@ class PostViewCell: UICollectionViewCell {
         let viewsCountLabelConstraints: [NSLayoutConstraint] = [
             self.viewsCountLabel.widthAnchor.constraint(equalToConstant: 55),
             self.viewsCountLabel.heightAnchor.constraint(equalToConstant: 20),
-            self.viewsCountLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor),
+            self.viewsCountLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -10),
             self.viewsCountLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: 34)
         ]
         NSLayoutConstraint.activate(viewsCountLabelConstraints)
@@ -199,6 +218,16 @@ class PostViewCell: UICollectionViewCell {
     }
     
     private func setBackgroundShapes() {
+        self.sendSubviewToBack(self.blurView)
+        
+        var shapes = [OvalView]()
+        for _ in 0..<3 {
+            let shapeView = OvalView()
+            shapes.append(shapeView)
+            self.addSubview(shapeView)
+            self.sendSubviewToBack(shapeView)
+        }
+        self.shapes = shapes
         
     }
 }

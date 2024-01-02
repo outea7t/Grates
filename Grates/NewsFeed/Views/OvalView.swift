@@ -8,7 +8,6 @@
 import UIKit
 
 class OvalView: UIView {
-
     // Only override draw() if you perform custom drawing.
     // An empty implementation adversely affects performance during animation.
     override func draw(_ rect: CGRect) {
@@ -23,8 +22,10 @@ class OvalView: UIView {
         let randomColor = colors[Int.random(in: 0..<colors.count)]
         randomColor.setFill()
         
-//        let path = UIBezierPath
+        let flattenedRect = CGRect(x: rect.origin.x + width/2.0, y: rect.origin.y + height / 2, width: width, height: height)
+        let flattenedOvalPath = UIBezierPath(ovalIn: flattenedRect)
+        
+        flattenedOvalPath.usesEvenOddFillRule = true
+        flattenedOvalPath.fill()
     }
-    
-
 }
