@@ -8,11 +8,11 @@
 import Foundation
 import UIKit
 
-struct PostData: Codable {
+struct PostData {
     var authorName: String
-//    var authorImage: UIImage
+    var authorImage: UIImage?
     var text: String
-//    var images: [UIImage]
+    var images: [UIImage]
     var likesNumber: Int
     var commentsNumber: Int
     var repostsNumber: Int

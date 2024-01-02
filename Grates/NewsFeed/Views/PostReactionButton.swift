@@ -33,6 +33,7 @@ class PostReactionButton: UIButton {
         self.imageName = imageName
         self.setupViews(count: count, imageName: imageName)
     }
+    
     override init(frame: CGRect) {
         self.count = 0
         self.imageName = ""

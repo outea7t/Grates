@@ -66,7 +66,7 @@ class HeaderBackgroundView: UIView {
         self.blurView.effect = effect
         self.blurView.contentView.backgroundColor = .clear
         self.blurView.backgroundColor = .clear
-        self.backgroundColor = #colorLiteral(red: 0.8784313725, green: 0.9333333333, blue: 1, alpha: 1)
+        self.backgroundColor = #colorLiteral(red: 0.8941176471, green: 0.9450980392, blue: 1, alpha: 1)
         
         self.blurView.translatesAutoresizingMaskIntoConstraints = false
         let blurViewConstraints: [NSLayoutConstraint] = [
