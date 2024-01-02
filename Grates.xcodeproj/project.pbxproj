@@ -12,6 +12,11 @@
 		2242029C2B2CEB6E00895E3F /* HaptickManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2242029B2B2CEB6E00895E3F /* HaptickManager.swift */; };
 		2242029E2B2CF4DE00895E3F /* NetworkCallInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2242029D2B2CF4DE00895E3F /* NetworkCallInformation.swift */; };
 		227514E72B3721D5005B1725 /* RegistrationNetworkCall.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227514E62B3721D5005B1725 /* RegistrationNetworkCall.swift */; };
+		227E03472B4320E9007E9335 /* HeaderBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227E03462B4320E9007E9335 /* HeaderBackgroundView.swift */; };
+		227E034A2B434EE8007E9335 /* PostData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227E03492B434EE8007E9335 /* PostData.swift */; };
+		227E034D2B435211007E9335 /* PostReactionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227E034C2B435211007E9335 /* PostReactionButton.swift */; };
+		227E03502B4358CF007E9335 /* PostViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227E034E2B4358CF007E9335 /* PostViewCell.swift */; };
+		227E03512B4358CF007E9335 /* PostViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 227E034F2B4358CF007E9335 /* PostViewCell.xib */; };
 		2299C4502B37B2EC0073F705 /* NetworkCallManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2299C44F2B37B2EC0073F705 /* NetworkCallManager.swift */; };
 		229EA2722B38A20500F3333A /* loadinganimation.riv in Resources */ = {isa = PBXBuildFile; fileRef = 229EA2712B38A20500F3333A /* loadinganimation.riv */; };
 		229EA2742B38D99900F3333A /* SuccessDescriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229EA2732B38D99900F3333A /* SuccessDescriptionView.swift */; };
@@ -54,11 +59,17 @@
 		2242029B2B2CEB6E00895E3F /* HaptickManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HaptickManager.swift; sourceTree = "<group>"; };
 		2242029D2B2CF4DE00895E3F /* NetworkCallInformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkCallInformation.swift; sourceTree = "<group>"; };
 		227514E62B3721D5005B1725 /* RegistrationNetworkCall.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationNetworkCall.swift; sourceTree = "<group>"; };
+		227E03462B4320E9007E9335 /* HeaderBackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderBackgroundView.swift; sourceTree = "<group>"; };
+		227E03492B434EE8007E9335 /* PostData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostData.swift; sourceTree = "<group>"; };
+		227E034C2B435211007E9335 /* PostReactionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostReactionButton.swift; sourceTree = "<group>"; };
+		227E034E2B4358CF007E9335 /* PostViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewCell.swift; sourceTree = "<group>"; };
+		227E034F2B4358CF007E9335 /* PostViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PostViewCell.xib; sourceTree = "<group>"; };
 		2299C44F2B37B2EC0073F705 /* NetworkCallManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkCallManager.swift; sourceTree = "<group>"; };
 		229EA2712B38A20500F3333A /* loadinganimation.riv */ = {isa = PBXFileReference; lastKnownFileType = file; path = loadinganimation.riv; sourceTree = "<group>"; };
 		229EA2732B38D99900F3333A /* SuccessDescriptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuccessDescriptionView.swift; sourceTree = "<group>"; };
 		229EA2752B38D9CA00F3333A /* NotificationDescriptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationDescriptionView.swift; sourceTree = "<group>"; };
 		229EA2772B38FE9000F3333A /* Tokens.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tokens.swift; sourceTree = "<group>"; };
+		22A5C12F2B3F6C6C009636EA /* Grates.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Grates.entitlements; sourceTree = "<group>"; };
 		22C95F072B21370D00EBEC3F /* Grates.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Grates.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		22C95F0A2B21370D00EBEC3F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		22C95F0C2B21370D00EBEC3F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -109,6 +120,7 @@
 				2213DA702B379992005FFE07 /* ErrorDescriptionView.swift */,
 				229EA2732B38D99900F3333A /* SuccessDescriptionView.swift */,
 				229EA2752B38D9CA00F3333A /* NotificationDescriptionView.swift */,
+				227E03462B4320E9007E9335 /* HeaderBackgroundView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -119,6 +131,24 @@
 				227514E62B3721D5005B1725 /* RegistrationNetworkCall.swift */,
 			);
 			path = NetworkCalls;
+			sourceTree = "<group>";
+		};
+		227E03482B434ED7007E9335 /* NewsFeedCollectionView */ = {
+			isa = PBXGroup;
+			children = (
+				227E03492B434EE8007E9335 /* PostData.swift */,
+				227E034E2B4358CF007E9335 /* PostViewCell.swift */,
+				227E034F2B4358CF007E9335 /* PostViewCell.xib */,
+			);
+			path = NewsFeedCollectionView;
+			sourceTree = "<group>";
+		};
+		227E034B2B4351F8007E9335 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				227E034C2B435211007E9335 /* PostReactionButton.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		2299C44E2B37B2D50073F705 /* Managers */ = {
@@ -175,6 +205,7 @@
 		22C95F092B21370D00EBEC3F /* Grates */ = {
 			isa = PBXGroup;
 			children = (
+				22A5C12F2B3F6C6C009636EA /* Grates.entitlements */,
 				22C95F0A2B21370D00EBEC3F /* AppDelegate.swift */,
 				22C95F0C2B21370D00EBEC3F /* SceneDelegate.swift */,
 				229EA2792B38FE9E00F3333A /* Data */,
@@ -265,6 +296,8 @@
 			isa = PBXGroup;
 			children = (
 				22E33D7F2B35F2CF00CC931F /* NewsFeedViewController.swift */,
+				227E034B2B4351F8007E9335 /* Views */,
+				227E03482B434ED7007E9335 /* NewsFeedCollectionView */,
 			);
 			path = NewsFeed;
 			sourceTree = "<group>";
@@ -345,6 +378,7 @@
 				22D22DF72B2B663000134A47 /* MPLUSRounded1c-Medium.ttf in Resources */,
 				22C95F222B21398000EBEC3F /* shapesanimation.riv in Resources */,
 				22DD32CE2B21EFC300B3A72B /* Comfortaa-Medium.ttf in Resources */,
+				227E03512B4358CF007E9335 /* PostViewCell.xib in Resources */,
 				22D22DF82B2B663000134A47 /* MPLUSRounded1c-Light.ttf in Resources */,
 				22C95F122B21370D00EBEC3F /* Main.storyboard in Resources */,
 				22DD32D12B21EFC300B3A72B /* Comfortaa-Bold.ttf in Resources */,
@@ -361,9 +395,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				229EA2742B38D99900F3333A /* SuccessDescriptionView.swift in Sources */,
+				227E03472B4320E9007E9335 /* HeaderBackgroundView.swift in Sources */,
+				227E034D2B435211007E9335 /* PostReactionButton.swift in Sources */,
 				22D22E022B2CB7B600134A47 /* StrokeLabel.swift in Sources */,
 				22DD32DD2B23A54700B3A72B /* RegistrationViewsTransition.swift in Sources */,
 				22DD32D92B22072300B3A72B /* RegisterTextField.swift in Sources */,
+				227E034A2B434EE8007E9335 /* PostData.swift in Sources */,
 				22C95F0F2B21370D00EBEC3F /* LogInViewController.swift in Sources */,
 				22E33D7D2B35DFFD00CC931F /* Validator.swift in Sources */,
 				229EA2762B38D9CA00F3333A /* NotificationDescriptionView.swift in Sources */,
@@ -376,6 +413,7 @@
 				2242029C2B2CEB6E00895E3F /* HaptickManager.swift in Sources */,
 				22C95F0D2B21370D00EBEC3F /* SceneDelegate.swift in Sources */,
 				22DD32DB2B236E0700B3A72B /* RegistrationViewController.swift in Sources */,
+				227E03502B4358CF007E9335 /* PostViewCell.swift in Sources */,
 				22DD32E02B23AB9F00B3A72B /* ColorNames.swift in Sources */,
 				227514E72B3721D5005B1725 /* RegistrationNetworkCall.swift in Sources */,
 				2242029E2B2CF4DE00895E3F /* NetworkCallInformation.swift in Sources */,
@@ -530,23 +568,26 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Grates/Grates.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 7XT92ZBRMN;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Grates/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Grates;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.social-networking";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = idk.Grates;
+				MARKETING_VERSION = 0.1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = Grates;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -559,23 +600,26 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Grates/Grates.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 7XT92ZBRMN;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Grates/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Grates;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.social-networking";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = idk.Grates;
+				MARKETING_VERSION = 0.1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = Grates;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;

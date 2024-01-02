@@ -492,19 +492,8 @@ extension LogInViewController {
         self.logInButton.tintColor = #colorLiteral(red: 0.1529411765, green: 0, blue: 0.3647058824, alpha: 1)
         self.logInButton.layer.cornerRadius = 13
         
-        self.logInButton.layer.shadowColor = UIColor.black.withAlphaComponent(0.5).cgColor
+        self.logInButton.layer.shadowColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.3)
         self.logInButton.layer.shadowRadius = 6
-        self.logInButton.layer.shadowOpacity = 1.0
-        
-        let shadowRect = CGRect(x: self.logInButton.frame.origin.x,
-                                y: self.logInButton.frame.origin.y,
-                                width: self.logInButton.frame.width + 50,
-                                height: self.logInButton.frame.height)
-        
-        let shadowPath = UIBezierPath(roundedRect: shadowRect, cornerRadius: 13).cgPath
-        
-        self.logInButton.layer.shadowPath = shadowPath
-        self.logInButton.layer.shadowOffset = CGSize(width: 0, height: 4)
     }
     
     private func setSignUpButton() {

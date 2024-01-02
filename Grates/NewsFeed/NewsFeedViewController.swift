@@ -12,7 +12,9 @@ class NewsFeedViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        let reactionButtonFrame = CGRect(origin: self.view.center, size: CGSize(width: 67, height: 35))
+        let reactionButton = PostReactionButton(frame: reactionButtonFrame, count: 1337, imageName: "bubble.left")
+        self.view.addSubview(reactionButton)
     }
     
 

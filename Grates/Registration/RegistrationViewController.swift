@@ -618,7 +618,7 @@ extension RegistrationViewController {
         
         self.passwordTextField.keyboardType = .default
         self.passwordTextField.clearButtonMode = .never
-        self.passwordTextField.textContentType = .password
+        self.passwordTextField.textContentType = .newPassword
         self.passwordTextField.returnKeyType = .go
         self.passwordTextField.isSecureTextEntry = true
         
