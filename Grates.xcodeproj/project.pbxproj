@@ -17,7 +17,7 @@
 		227E034D2B435211007E9335 /* PostReactionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227E034C2B435211007E9335 /* PostReactionButton.swift */; };
 		227E03502B4358CF007E9335 /* PostViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227E034E2B4358CF007E9335 /* PostViewCell.swift */; };
 		227E03512B4358CF007E9335 /* PostViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 227E034F2B4358CF007E9335 /* PostViewCell.xib */; };
-		227E03532B44A52C007E9335 /* OvalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227E03522B44A52C007E9335 /* OvalView.swift */; };
+		227E03532B44A52C007E9335 /* PostShapesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227E03522B44A52C007E9335 /* PostShapesView.swift */; };
 		2299C4502B37B2EC0073F705 /* NetworkCallManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2299C44F2B37B2EC0073F705 /* NetworkCallManager.swift */; };
 		229EA2722B38A20500F3333A /* loadinganimation.riv in Resources */ = {isa = PBXBuildFile; fileRef = 229EA2712B38A20500F3333A /* loadinganimation.riv */; };
 		229EA2742B38D99900F3333A /* SuccessDescriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229EA2732B38D99900F3333A /* SuccessDescriptionView.swift */; };
@@ -50,7 +50,6 @@
 		22DD32DD2B23A54700B3A72B /* RegistrationViewsTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DD32DC2B23A54700B3A72B /* RegistrationViewsTransition.swift */; };
 		22DD32E02B23AB9F00B3A72B /* ColorNames.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DD32DF2B23AB9F00B3A72B /* ColorNames.swift */; };
 		22DD32E22B23ABA800B3A72B /* SeguesNames.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DD32E12B23ABA800B3A72B /* SeguesNames.swift */; };
-		22E33D7D2B35DFFD00CC931F /* Validator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E33D7C2B35DFFD00CC931F /* Validator.swift */; };
 		22E33D802B35F2CF00CC931F /* NewsFeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E33D7F2B35F2CF00CC931F /* NewsFeedViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -65,7 +64,7 @@
 		227E034C2B435211007E9335 /* PostReactionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostReactionButton.swift; sourceTree = "<group>"; };
 		227E034E2B4358CF007E9335 /* PostViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewCell.swift; sourceTree = "<group>"; };
 		227E034F2B4358CF007E9335 /* PostViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PostViewCell.xib; sourceTree = "<group>"; };
-		227E03522B44A52C007E9335 /* OvalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OvalView.swift; sourceTree = "<group>"; };
+		227E03522B44A52C007E9335 /* PostShapesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostShapesView.swift; sourceTree = "<group>"; };
 		2299C44F2B37B2EC0073F705 /* NetworkCallManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkCallManager.swift; sourceTree = "<group>"; };
 		229EA2712B38A20500F3333A /* loadinganimation.riv */ = {isa = PBXFileReference; lastKnownFileType = file; path = loadinganimation.riv; sourceTree = "<group>"; };
 		229EA2732B38D99900F3333A /* SuccessDescriptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuccessDescriptionView.swift; sourceTree = "<group>"; };
@@ -100,7 +99,6 @@
 		22DD32DC2B23A54700B3A72B /* RegistrationViewsTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewsTransition.swift; sourceTree = "<group>"; };
 		22DD32DF2B23AB9F00B3A72B /* ColorNames.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorNames.swift; sourceTree = "<group>"; };
 		22DD32E12B23ABA800B3A72B /* SeguesNames.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeguesNames.swift; sourceTree = "<group>"; };
-		22E33D7C2B35DFFD00CC931F /* Validator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Validator.swift; sourceTree = "<group>"; };
 		22E33D7F2B35F2CF00CC931F /* NewsFeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsFeedViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -149,7 +147,7 @@
 			isa = PBXGroup;
 			children = (
 				227E034C2B435211007E9335 /* PostReactionButton.swift */,
-				227E03522B44A52C007E9335 /* OvalView.swift */,
+				227E03522B44A52C007E9335 /* PostShapesView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -289,7 +287,6 @@
 				22DD32DA2B236E0700B3A72B /* RegistrationViewController.swift */,
 				2213DA722B379D00005FFE07 /* EmailConfiramtionViewController.swift */,
 				22DD32DC2B23A54700B3A72B /* RegistrationViewsTransition.swift */,
-				22E33D7C2B35DFFD00CC931F /* Validator.swift */,
 				22D22E002B2CB79800134A47 /* Views */,
 			);
 			path = Registration;
@@ -403,10 +400,9 @@
 				22D22E022B2CB7B600134A47 /* StrokeLabel.swift in Sources */,
 				22DD32DD2B23A54700B3A72B /* RegistrationViewsTransition.swift in Sources */,
 				22DD32D92B22072300B3A72B /* RegisterTextField.swift in Sources */,
-				227E03532B44A52C007E9335 /* OvalView.swift in Sources */,
+				227E03532B44A52C007E9335 /* PostShapesView.swift in Sources */,
 				227E034A2B434EE8007E9335 /* PostData.swift in Sources */,
 				22C95F0F2B21370D00EBEC3F /* LogInViewController.swift in Sources */,
-				22E33D7D2B35DFFD00CC931F /* Validator.swift in Sources */,
 				229EA2762B38D9CA00F3333A /* NotificationDescriptionView.swift in Sources */,
 				229EA2782B38FE9000F3333A /* Tokens.swift in Sources */,
 				2213DA732B379D00005FFE07 /* EmailConfiramtionViewController.swift in Sources */,

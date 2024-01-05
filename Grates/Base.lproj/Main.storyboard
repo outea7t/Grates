@@ -298,7 +298,7 @@
                         <color key="backgroundColor" red="0.89411764705882346" green="0.94509803921568625" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="dmo-bU-G4x" firstAttribute="trailing" secondItem="xFm-tq-jGN" secondAttribute="trailing" id="LEu-zv-nbF"/>
-                            <constraint firstItem="dmo-bU-G4x" firstAttribute="bottom" secondItem="xFm-tq-jGN" secondAttribute="bottom" id="XoG-Zn-d7O"/>
+                            <constraint firstItem="dmo-bU-G4x" firstAttribute="bottom" secondItem="uoV-Lf-X9K" secondAttribute="bottom" id="XoG-Zn-d7O"/>
                             <constraint firstItem="dmo-bU-G4x" firstAttribute="leading" secondItem="xFm-tq-jGN" secondAttribute="leading" id="iH8-U8-JFa"/>
                             <constraint firstItem="dmo-bU-G4x" firstAttribute="top" secondItem="xFm-tq-jGN" secondAttribute="top" id="z1c-zF-cIZ"/>
                         </constraints>
@@ -348,7 +348,7 @@
     </inferredMetricsTieBreakers>
     <resources>
         <systemColor name="linkColor">
-            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

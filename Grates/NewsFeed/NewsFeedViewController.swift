@@ -21,15 +21,16 @@ class NewsFeedViewController: UIViewController {
     
     private let userAvatarImageView = UIImageView()
     
+    private let postWidthConstant = 0.95
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = #colorLiteral(red: 0.8941176471, green: 0.9450980392, blue: 1, alpha: 1)
+        self.view.backgroundColor = #colorLiteral(red: 0.9568627451, green: 0.9568627451, blue: 0.9568627451, alpha: 1)
         
         let cellClass = UINib(nibName: self.cellIdentifier, bundle: nil)
         self.collectionView.register(cellClass, forCellWithReuseIdentifier: self.cellIdentifier)
         self.collectionView.dataSource = self
         self.collectionView.delegate = self
-        self.collectionView.backgroundColor = #colorLiteral(red: 0.8941176471, green: 0.9450980392, blue: 1, alpha: 1)
+        self.collectionView.backgroundColor = #colorLiteral(red: 0.9568627451, green: 0.9568627451, blue: 0.9568627451, alpha: 1)
         
         // настраиваем расположение ячеек в collectionView
         let layout = UICollectionViewFlowLayout()
@@ -37,19 +38,19 @@ class NewsFeedViewController: UIViewController {
         layout.minimumLineSpacing = 15
         layout.minimumInteritemSpacing = 15
         // отступы от конкретных граней
-        layout.sectionInset = UIEdgeInsets(top: 120, left: 0, bottom: 10, right: 0)
+        // пост не будет на всю длину экрана, но мы хотим, чтобы он был в центре, поэтому сдвигаем его
+        let rightOffset = self.view.frame.width*((1.0 - self.postWidthConstant)/2.0)
+        layout.sectionInset = UIEdgeInsets(top: 100, left: 0, bottom: 10, right: 0)
         
         self.collectionView.collectionViewLayout = layout
         
         let text = """
         Русский язык — это удивительная и богатая система, которая проникнута историей, культурой и литературным наследием. Он является одним из самых распространенных языков мира. Его уникальность проявляется в богатстве слов, гибкости грамматики и разнообразии диалектов.
-                                                  
-        Величие русского языка отражается в его способности выразить сложные мысли, эмоции и идеи.  Русские классики, такие как Пушкин, Толстой, Достоевский, создали произведения, которые стали не только великими в своем языке, но и уникальными для мировой литературы
-        
-        Русский язык — это удивительная и богатая система, которая проникнута историей, культурой и литературным наследием. Он является одним из самых распространенных языков мира. Его уникальность проявляется в богатстве слов, гибкости грамматики и разнообразии диалектов.
-                                                          
-        Величие русского языка отражается в его способности выразить сложные мысли, эмоции и идеи.  Русские классики, такие как Пушкин, Толстой, Достоевский, создали произведения, которые стали не только великими в своем языке, но и уникальными для мировой литературы
+            — это удивительная и богатая система, которая проникнута историей, культурой и литературным наследием. Он является одним из самых распространенных языков мира. Его уникальность проявляется в богатстве слов, гибкости грамматики и разнообразии диалектов.
         """
+        self.postCellData.append(PostData(authorName: "Россия", text: text, images: [], likesNumber: 1000, commentsNumber: 1000, repostsNumber: 1000, viewsNumber: 19700, date: "28 dec 18:39"))
+        self.postCellData.append(PostData(authorName: "Россия", text: text, images: [], likesNumber: 1000, commentsNumber: 1000, repostsNumber: 1000, viewsNumber: 19700, date: "28 dec 18:39"))
+        
         self.postCellData.append(PostData(authorName: "Россия", text: text, images: [], likesNumber: 1000, commentsNumber: 1000, repostsNumber: 1000, viewsNumber: 19700, date: "28 dec 18:39"))
         
         self.headerBackgroundView.addSubview(self.userAvatarImageView)
@@ -57,10 +58,14 @@ class NewsFeedViewController: UIViewController {
         self.headerBackgroundView.addSubview(self.notificationsButton)
         self.headerBackgroundView.addSubview(self.uploadPostButton)
         
+        self.notificationsButton.backgroundColor = .red
+        self.uploadPostButton.backgroundColor = .red
+        
         self.setUserAvatar()
         self.setFeedLabel()
         self.setNotificationsButton()
         self.setUploadPostButton()
+        
     }
     
     private func setUserAvatar() {
@@ -94,25 +99,29 @@ class NewsFeedViewController: UIViewController {
     }
     
     private func setUploadPostButton() {
-        let configuration = UIImage.SymbolConfiguration(pointSize: 22, weight: .medium)
+        let configuration = UIImage.SymbolConfiguration(pointSize: 33, weight: .regular)
         let plusImage = UIImage(systemName: "plus.circle", withConfiguration: configuration)
-        self.uploadPostButton.imageView?.image = plusImage
+        
+        self.uploadPostButton.setImage(plusImage, for: .normal)
+        self.uploadPostButton.tintColor = #colorLiteral(red: 0.1529411765, green: 0, blue: 0.3647058824, alpha: 1)
         self.uploadPostButton.backgroundColor = .clear
         
         self.uploadPostButton.translatesAutoresizingMaskIntoConstraints = false
         let constraints: [NSLayoutConstraint] = [
             self.uploadPostButton.widthAnchor.constraint(equalToConstant: 38),
             self.uploadPostButton.heightAnchor.constraint(equalToConstant: 38),
-            self.uploadPostButton.trailingAnchor.constraint(equalTo: self.notificationsButton.trailingAnchor, constant: 10),
+            self.uploadPostButton.trailingAnchor.constraint(equalTo: self.notificationsButton.leadingAnchor, constant: -10),
             self.uploadPostButton.topAnchor.constraint(equalTo: self.headerBackgroundView.topAnchor, constant: 65)
         ]
         NSLayoutConstraint.activate(constraints)
     }
     
     private func setNotificationsButton() {
-        let configuration = UIImage.SymbolConfiguration(pointSize: 22, weight: .medium)
+        let configuration = UIImage.SymbolConfiguration(pointSize: 33, weight: .regular)
         let bellImage = UIImage(systemName: "bell", withConfiguration: configuration)
-        self.notificationsButton.imageView?.image = bellImage
+        
+        self.notificationsButton.setImage(bellImage, for: .normal)
+        self.notificationsButton.tintColor = #colorLiteral(red: 0.1529411765, green: 0, blue: 0.3647058824, alpha: 1)
         self.notificationsButton.backgroundColor = .clear
         
         self.notificationsButton.translatesAutoresizingMaskIntoConstraints = false
@@ -128,7 +137,7 @@ class NewsFeedViewController: UIViewController {
 }
 
 extension NewsFeedViewController: UIScrollViewDelegate {
-    
+    // TODO: Сделать проигрывание анимации подсвечивания постов при скролле
 }
 
 extension NewsFeedViewController: UICollectionViewDataSource {
@@ -149,7 +158,15 @@ extension NewsFeedViewController: UICollectionViewDataSource {
 }
 
 extension NewsFeedViewController: UICollectionViewDelegateFlowLayout {
-    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        
+        
+        var size = CGSize(width: self.view.frame.width, height: 500)
+        if let cellHeight = self.collectionView.cellForItem(at: indexPath)?.bounds.height {
+            size.height = cellHeight
+        }
+        return size
+    }
 }
 
 extension NewsFeedViewController: UICollectionViewDelegate {

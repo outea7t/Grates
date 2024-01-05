@@ -52,7 +52,7 @@ class PostReactionButton: UIButton {
             return
         }
         
-        self.backgroundColor = #colorLiteral(red: 0.2078431373, green: 0.2274509804, blue: 0.6980392157, alpha: 0.25)
+        self.backgroundColor = #colorLiteral(red: 0.2156862745, green: 0.2078431373, blue: 0.6980392157, alpha: 0.25)
         self.layer.cornerRadius = self.frame.height/2.0
         
         self.label.font = UIFont(name: "Comfortaa Bold", size: 13)
